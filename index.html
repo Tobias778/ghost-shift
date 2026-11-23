@@ -260,6 +260,7 @@ h2,h3{font-family:var(--type);font-weight:400;margin:0 0 8px}
 <div id="end"><h2 id="endH">Trace complete</h2><p id="endP">They found the intrusion. Contract failed.</p><button class="big" onclick="location.reload()">Try again</button></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script>
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const S={scanned:false,auth:false,mon:false,cam:false,hacked:false,trace:0,wipes:2,host:null,ev:[],shots:{}};
@@ -487,23 +488,68 @@ function initWebcam3D(){
 
 /* ---------- phone remote: shared link ---------- */
 const RC={link:null,kind:null,peer:false,code:null,last:0,send(t,d){if(RC.link)RC.link.send(t,d)}};
-async function rcTransport(code){
-  const name='gs-'+code;
+/* How the computer and phone reach each other:
+   1. inside claude.ai: the artifact's live room
+   2. anywhere else (GitHub Pages, any web host): WebRTC via PeerJS, paired by the code
+   3. last resort: BroadcastChannel (two tabs in one browser only) */
+const PEER_PREFIX='ghostshift-v1-';
+const peerOpts=()=>Object.assign({debug:0,config:{iceServers:[{urls:'stun:stun.l.google.com:19302'},{urls:'stun:stun1.l.google.com:19302'}]}},window.GS_PEER_OPTS||{});
+const withTimeout=(p,ms,err)=>Promise.race([p,new Promise((_,rej)=>setTimeout(()=>rej(new Error(err)),ms))]);
+function peerHost(code){
+  return new Promise((res,rej)=>{
+    if(typeof Peer!=='function')return rej(new Error('nolib'));
+    const peer=new Peer(PEER_PREFIX+code,peerOpts());const conns=new Set(),hs=[];let opened=false;
+    const t=setTimeout(()=>{if(!opened){try{peer.destroy()}catch(e){}rej(new Error('timeout'))}},9000);
+    peer.on('open',()=>{opened=true;clearTimeout(t);res({kind:'peer',
+      send:(tp,d)=>conns.forEach(c=>{if(c.open)try{c.send({t:tp,d})}catch(e){}}),
+      on:(tp,f)=>hs.push({t:tp,f}),onConn:f=>setTimeout(()=>f(true)),leave:()=>peer.destroy()})});
+    peer.on('connection',c=>{c.on('open',()=>conns.add(c));c.on('data',m=>{if(m&&typeof m==='object')hs.forEach(h=>{if(h.t===m.t)h.f(m.d)})});c.on('close',()=>conns.delete(c));c.on('error',()=>conns.delete(c))});
+    peer.on('disconnected',()=>{try{peer.reconnect()}catch(e){}});
+    peer.on('error',e=>{if(!opened){clearTimeout(t);try{peer.destroy()}catch(x){}rej(new Error(e&&e.type==='unavailable-id'?'taken':'peer:'+(e&&e.type)))}});
+  });
+}
+function peerJoin(code){
+  return new Promise((res,rej)=>{
+    if(typeof Peer!=='function')return rej(new Error('nolib'));
+    const peer=new Peer(peerOpts());const hs=[];let done=false;
+    const fail=m=>{if(done)return;done=true;try{peer.destroy()}catch(e){}rej(new Error(m))};
+    const t=setTimeout(()=>fail('timeout'),12000);
+    peer.on('error',e=>fail(e&&e.type==='peer-unavailable'?'nogame':'peer:'+(e&&e.type)));
+    peer.on('open',()=>{const c=peer.connect(PEER_PREFIX+code,{reliable:true});
+      c.on('open',()=>{if(done)return;done=true;clearTimeout(t);res({kind:'peer',
+        send:(tp,d)=>{if(c.open)try{c.send({t:tp,d})}catch(e){}},
+        on:(tp,f)=>hs.push({t:tp,f}),onConn:f=>setTimeout(()=>f(true)),leave:()=>peer.destroy(),
+        onClose:f=>c.on('close',f)})});
+      c.on('data',m=>{if(m&&typeof m==='object')hs.forEach(h=>{if(h.t===m.t)h.f(m.d)})});
+      c.on('error',()=>fail('conn'))});
+  });
+}
+async function roomLink(code){
   let room=null;
   try{if(window.claude&&typeof claude.use==='function')room=await claude.use('room')}catch(e){room=null}
-  if(room){try{const r=await room.join(name);
-    return {kind:'room',send:(t,d)=>r.emit(t,d).catch(()=>{}),on:(t,f)=>r.on(t,m=>{if(!m.sameTab)f(m.data)}),onConn:f=>r.onConnection(f),leave:()=>r.leave()}}catch(e){}}
-  if('BroadcastChannel' in window){const bc=new BroadcastChannel(name);const hs=[];bc.onmessage=e=>{const m=e.data||{};hs.forEach(h=>{if(h.t===m.t)h.f(m.d)})};
-    return {kind:'local',send:(t,d)=>bc.postMessage({t,d}),on:(t,f)=>{hs.push({t,f})},onConn:f=>setTimeout(()=>f(true)),leave:()=>bc.close()}}
-  return null;
+  if(!room)return null;
+  try{const r=await room.join('gs-'+code);
+    return {kind:'room',send:(t,d)=>r.emit(t,d).catch(()=>{}),on:(t,f)=>r.on(t,m=>{if(!m.sameTab)f(m.data)}),onConn:f=>r.onConnection(f),leave:()=>r.leave()}}catch(e){return null}
+}
+function localLink(code){
+  if(!('BroadcastChannel' in window))return null;
+  const bc=new BroadcastChannel('gs-'+code);const hs=[];bc.onmessage=e=>{const m=e.data||{};hs.forEach(h=>{if(h.t===m.t)h.f(m.d)})};
+  return {kind:'local',send:(t,d)=>bc.postMessage({t,d}),on:(t,f)=>{hs.push({t,f})},onConn:f=>setTimeout(()=>f(true)),leave:()=>bc.close()};
+}
+const inClaude=()=>!!(window.claude&&typeof window.claude.use==='function');
+/* role: 'host' (computer) or 'phone'. Returns {link} or {error} */
+async function rcTransport(code,role){
+  if(inClaude()){const r=await roomLink(code);if(r)return {link:r}}
+  try{return {link:await (role==='host'?peerHost(code):peerJoin(code))}}
+  catch(e){if(e.message==='taken'||e.message==='nogame')return {error:e.message};RC.peerErr=e.message}
+  const l=localLink(code);return l?{link:l}:{error:'none'};
 }
 const rcCode=()=>{const a='abcdefghjkmnpqrstuvwxyz23456789';let s='';for(let i=0;i<4;i++)s+=a[Math.floor(Math.random()*a.length)];return s};
-
-/* ---------- PC side: host the link ---------- */
 async function rcHost(){
-  RC.code=rcCode();rcHostUI();
-  const link=await rcTransport(RC.code);if(!link){rcHostUI('none');return}
-  RC.link=link;RC.kind=link.kind;rcHostUI();
+  let res;
+  for(let i=0;i<4;i++){RC.code=rcCode();rcHostUI();res=await rcTransport(RC.code,'host');if(res.error!=='taken')break}
+  if(!res.link){rcHostUI('none');return}
+  const link=res.link;RC.link=link;RC.kind=link.kind;rcHostUI();
   link.on('rc.hello',()=>{const was=RC.peer;RC.peer=true;RC.last=Date.now();if(!was){rcHostUI();say('Phone remote linked.','g');ping('term')}rcPush()});
   link.on('rc.cmd',m=>{RC.last=Date.now();if(!RC.peer){RC.peer=true;rcHostUI()}rcCmd(m)});
   setInterval(()=>{if(RC.peer&&Date.now()-RC.last>9000){RC.peer=false;rcHostUI();say('Phone remote disconnected.','e')}},2000);
@@ -525,7 +571,8 @@ function rcHostUI(state){
   const code=(RC.code||'----').toUpperCase();
   const status=state==='none'?'Remote linking is not available in this browser.':
     RC.peer?'Phone linked. Its controls drive the hacked cameras.':
-    RC.kind==='local'?'Local test mode: open this file in a second tab and tap “Use as phone remote”. A real phone pairs through the published page.':
+    RC.kind==='local'?'Offline mode: the pairing service could not be reached ('+(RC.peerErr||'unknown')+'), so only another tab in this browser can be the remote. Check the internet connection and reload.':
+    RC.kind==='peer'?'Waiting for a phone… Works across devices and networks; both need internet.':
     RC.kind==='room'?'Waiting for a phone…':'Starting link…';
   $$('.rcCode').forEach(e=>e.textContent=code);$$('.rcStatus').forEach(e=>e.textContent=status);
   $('#rcPill').textContent=RC.peer?'📱 Phone linked':'📱 Pair code '+code;$('#rcPill').classList.toggle('on',RC.peer);
@@ -539,14 +586,17 @@ function rcPhone(){
   const go=async()=>{const code=inp.value.trim().toLowerCase().replace(/[^a-z0-9]/g,'');
     if(code.length!==4){$('#rcPairMsg').textContent='The code has 4 characters. Find it in the game’s Briefing tab, or run pair phone in its Terminal.';return}
     $('#rcPairMsg').textContent='Connecting…';$('#rcGo').disabled=true;
-    const link=await rcTransport(code);$('#rcGo').disabled=false;
-    if(!link){$('#rcPairMsg').textContent='This browser cannot link. Open the game’s published page in a browser signed in to claude.ai.';return}
+    const res=await rcTransport(code,'phone');$('#rcGo').disabled=false;
+    if(res.error==='nogame'){$('#rcPairMsg').textContent='No game is waiting with code '+code.toUpperCase()+'. Check the code on the computer’s Briefing tab and keep the game open there.';return}
+    if(!res.link){$('#rcPairMsg').textContent='Could not reach the pairing service. Check this phone’s internet connection and try again.';return}
+    const link=res.link;if(RC.link&&RC.link.leave)try{RC.link.leave()}catch(e){}
+    if(link.onClose)link.onClose(()=>{$('#rcStat').textContent='Disconnected';$('#rcStat').classList.remove('on');rcNote('Lost the link to the computer. Reload this page and pair again.',false)});
     RC.link=link;RC.kind=link.kind;RC.code=code;
     link.on('rc.state',rcRender);link.on('rc.frame',d=>{if(d&&typeof d.f==='string'&&d.f.startsWith('data:image/jpeg')){$('#rcImg').src=d.f;P.img=true;$('#rcFeed').classList.add('live')}});
     link.on('rc.result',d=>{if(!d)return;rcNote(String(d.msg||''),!!d.ok);if(d.ok&&d.id&&typeof d.shot==='string'&&d.shot.startsWith('data:image/jpeg'))P.shots[d.id]=d.shot;if(d.ok&&navigator.vibrate)navigator.vibrate([30,40,30])});
     link.send('rc.hello',{});setInterval(()=>link.send('rc.hello',{}),3000);
     $('#rcStat').textContent='Searching';$('#rcPairMsg').textContent='Linked to room '+code.toUpperCase()+'. Waiting for the game…';
-    setTimeout(()=>{if(!P.st)$('#rcPairMsg').textContent='No answer from code '+code.toUpperCase()+'. Check the code and that the game is open on the computer'+(RC.kind==='local'?' in this same browser.':'.')},6000);
+    setTimeout(()=>{if(!P.st)$('#rcPairMsg').textContent='No answer from code '+code.toUpperCase()+'. Check the code and that the game is open on the computer'+(RC.kind==='local'?'. The pairing service could not be reached, so only tabs in this same browser can link.':'.')},6000);
   };
   $('#rcGo').onclick=go;inp.onkeydown=e=>{if(e.key==='Enter')go()};
   rcControls();
