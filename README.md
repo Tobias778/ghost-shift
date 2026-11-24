@@ -193,7 +193,7 @@ The **PC or laptop** is mission control. The **phone** becomes your field device
 
 - **Visual inspiration:** ![image alt](https://github.com/Tobias778/ghost-shift/blob/374959f0d8a0581664ad397462374408f82e27ff/preview%20(1).webp)
 - **Art direction / moodboard:** ![image alt](https://github.com/Tobias778/ghost-shift/blob/30efde08bec3199b4aaacd33f167fdc1c5c89681/preview.webp)
-- **Image 01 — Adsumsoft homepage:** ![home page](https://github.com/Tobias778/ghost-shift/blob/9a36e804031977fa0f929e2c8734415c93a62018/7cd70a44-4060-48de-8191-3f5ac4fc6824.png)
+- **Image 01 — Adsumsoft homepage inspiration:** ![home page](https://github.com/Tobias778/ghost-shift/blob/9a36e804031977fa0f929e2c8734415c93a62018/7cd70a44-4060-48de-8191-3f5ac4fc6824.png)
 - **Image 02 — Stage 01 cipher interface:** ![homepage](https://github.com/Tobias778/ghost-shift/blob/b7fb845c38aac0ca06ad4310d8e29998f591af28/O7ex1B2-Oh3vkNRkdCbCN-Jtr8_qnlCzZMeuqDyES9BAxGaqvStIFvba0n4lsrnTquPqKH4OmJJEHuwKKOGABhbf_YnV5S65ztCYTiJO9QKv7us7gmqYXrxcjBmj4rzzjmmDyMLpR7KNkMmYNb5IyFSJMWoBGvatxecQyMzRTWvN3rpv47LIK1vIorJ6XQJT.jpg)
 - **Image 03 — Stage 02 vulnerable archive:** ![archive](https://github.com/Tobias778/ghost-shift/blob/55b9b917210509c5b30acee2c8e8b1c6aa6dcc22/images.jpg)
 - **Image 04 — Stage 03 surveillance / evidence capture:** ![watchdog](https://github.com/Tobias778/ghost-shift/blob/9a36e804031977fa0f929e2c8734415c93a62018/preview%20(3).webp)
@@ -205,7 +205,11 @@ The **PC or laptop** is mission control. The **phone** becomes your field device
 - https://www.acunetix.com/websitesecurity/sql-injection/
 - https://www.youtube.com/watch?v=lS65X0U1rp4
 - https://www.youtube.com/watch?v=BPazh2kDdvA
-
+- https://www.geeksforgeeks.org/techtips/how-to-turn-your-mobile-phone-into-a-pc-remote-control/ ( Phone to PC )
+- https://www.scribd.com/document/845176893/Controlling-a-PC-Using-a-Mobile-Phone ( Reference Phone To PC )
+- https://dev.to/varundeva/access-localhost-on-mobile-within-the-same-network-4h7o
+- https://stackoverflow.com/questions/48179597/connect-to-live-html-preview-from-another-device-on-same-network
+  
 ### `// REPOSITORY SIGNAL TAGS //`
 
 <kbd>cybersecurity-game</kbd> <kbd>hacking-simulator</kbd> <kbd>ctf</kbd> <kbd>sql-injection</kbd> <kbd>cryptography</kbd> <kbd>puzzle-game</kbd> <kbd>dual-screen</kbd> <kbd>javascript</kbd> <kbd>fictional-world</kbd>
