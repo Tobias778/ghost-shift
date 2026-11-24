@@ -40,6 +40,7 @@
 │  Find the proof. Stay sharp. Finish the operation.               │
 └──────────────────────────────────────────────────────────────────┘
 ```
+![Adrian Voss](https://github.com/Tobias778/ghost-shift/blob/c08699d8ab0f22da9cf3b48903e620a7bc8327a8/Screenshot%202026-11-24%20093544.png)
 
 <div align="center">
 
