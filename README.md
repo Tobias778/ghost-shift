@@ -25,17 +25,17 @@
 
 ```text
 ┌──────────────────────────────────────────────────────────────────┐
-│  ENCRYPTED TRANSMISSION                              PRIORITY: 01 │
+│  ENCRYPTED TRANSMISSION                             PRIORITY: 01 │
 ├──────────────────────────────────────────────────────────────────┤
 │  TO:      NEW RECRUIT                                            │
 │  FROM:    [REDACTED] / INVESTIGATIONS UNIT                       │
 │  SUBJECT: OPERATION FALLEN EMPIRE                                │
 │                                                                  │
-│  Welcome, Agent.                                                │
+│  Welcome, Agent.                                                 │
 │                                                                  │
 │  Adsumsoft owns the games. The servers. The data. The narrative. │
 │  Its founder, Adrian Voss, calls it innovation.                  │
-│  We believe there is something darker beneath the surface.      │
+│  We believe there is something darker beneath the surface.       │
 │                                                                  │
 │  Find the proof. Stay sharp. Finish the operation.               │
 └──────────────────────────────────────────────────────────────────┘
