@@ -1,6 +1,6 @@
 <div align="center">
 
-# ⌁ ADSUMSOFT: OPERATION FALLEN EMPIRE
+# ⌁ Ayakasides: OPERATION FALLEN EMPIRE
 
 <img src="https://img.shields.io/badge/%2F%2F%20CLASSIFIED-RECRUITMENT%20BRIEFING-AD1457?style=for-the-badge&labelColor=0D1117" alt="Classified recruitment briefing" />
 
@@ -33,7 +33,7 @@
 │                                                                  │
 │  Welcome, Agent.                                                 │
 │                                                                  │
-│  Adsumsoft owns the games. The servers. The data. The narrative. │
+│  Ayakasides owns the games. The servers. The data. The narrative. │
 │  Its founder, Adrian Voss, calls it innovation.                  │
 │  We believe there is something darker beneath the surface.       │
 │                                                                  │
@@ -54,14 +54,14 @@
 
 ![Intel Classification](https://img.shields.io/badge/INTEL-RESTRICTED-DC2626?style=flat-square&labelColor=1E293B) ![Suspect](https://img.shields.io/badge/SUBJECT-ADRIAN%20VOSS-8B5CF6?style=flat-square&labelColor=1E293B)
 
-> **ORGANIZATION:** Adsumsoft Corporation  
+> **ORGANIZATION:** Ayakasides Corporation  
 > **PRIMARY SUBJECT:** Dr. Adrian Voss — Founder & CEO  
 > **SUSPECTED OPERATION:** Project DOMINION  
 > **MISSION:** Uncover the conspiracy and stop it inside the game world.
 
-Adsumsoft presents itself as a global leader in gaming, digital research, and technology. Its charismatic founder, **Dr. Adrian Voss**, is celebrated as a game historian and creator.
+Ayakasides presents itself as a global leader in gaming, digital research, and technology. Its charismatic founder, **Dr. Adrian Voss**, is celebrated as a game historian and creator.
 
-But fragments of intercepted information suggest that **Project DOMINION** is more than another corporate initiative. Your assignment is to connect the clues, enter Adsumsoft's *fictional* legacy systems, and recover enough evidence to expose the truth.
+But fragments of intercepted information suggest that **Project DOMINION** is more than another corporate initiative. Your assignment is to connect the clues, enter Ayakasides's *fictional* legacy systems, and recover enough evidence to expose the truth.
 
 **You are not here to press a “HACK” button. You are here to think like an investigator.**
 
@@ -82,7 +82,7 @@ But fragments of intercepted information suggest that **Project DOMINION** is mo
 
 ![Type](https://img.shields.io/badge/MODULE-CRYPTOGRAPHY-A78BFA?style=flat-square&labelColor=101820) ![Goal](https://img.shields.io/badge/OBJECTIVE-FIND%20THE%20KEY-34D399?style=flat-square&labelColor=101820)
 
-**Assignment:** Intercept an encrypted message hidden in Adsumsoft's public-facing material.
+**Assignment:** Intercept an encrypted message hidden in Ayakasides's public-facing material.
 
 The text looks meaningless. It isn't. Explore the available clues, identify the cipher, and decode the message that points to your next target.
 
@@ -97,7 +97,7 @@ The text looks meaningless. It isn't. Explore the available clues, identify the 
 
 ![Type](https://img.shields.io/badge/MODULE-SQL%20INJECTION-22D3EE?style=flat-square&labelColor=101820) ![Goal](https://img.shields.io/badge/OBJECTIVE-FIND%20THE%20FLAW-34D399?style=flat-square&labelColor=101820) ![Lab](https://img.shields.io/badge/TARGET-LOCAL%20LAB-64748B?style=flat-square&labelColor=101820)
 
-**Assignment:** Investigate an outdated Adsumsoft archive interface.
+**Assignment:** Investigate an outdated Ayakasides archive interface.
 
 The database isn't supposed to reveal restricted information—but its search function has a weakness. Learn how the simulated query behaves, investigate the flaw, and retrieve the concealed record that points toward Project DOMINION.
 
@@ -112,7 +112,7 @@ The database isn't supposed to reveal restricted information—but its search fu
 
 ![Type](https://img.shields.io/badge/MODULE-EVIDENCE%20CAPTURE-F43F5E?style=flat-square&labelColor=101820) ![Goal](https://img.shields.io/badge/OBJECTIVE-FIND%20THE%20PROOF-34D399?style=flat-square&labelColor=101820)
 
-**Assignment:** Follow the recovered lead into Adsumsoft's surveillance environment.
+**Assignment:** Follow the recovered lead into Ayakasides's surveillance environment.
 
 Control the simulated camera feed, inspect the scene, zoom in on suspicious objects, and capture the right evidence. A screenshot alone is not enough: connect what you see to what you discovered in the previous stages.
 
@@ -168,7 +168,7 @@ The **PC or laptop** is mission control. The **phone** becomes your field device
 - [x] Add verified setup and play instructions
 - [x] Connect and polish the full three-stage experience
 
-> **Training-environment notice:** Adsumsoft, Adrian Voss, Project DOMINION, and all in-game systems are fictional. The cybersecurity challenges are intended for an authorized, self-contained simulation—not real-world targets.
+> **Training-environment notice:** Ayakasides, Adrian Voss, Project DOMINION, and all in-game systems are fictional. The cybersecurity challenges are intended for an authorized, self-contained simulation—not real-world targets.
 
 ---
 
@@ -193,7 +193,7 @@ The **PC or laptop** is mission control. The **phone** becomes your field device
 
 - **Visual inspiration:** ![image alt](https://github.com/Tobias778/ghost-shift/blob/374959f0d8a0581664ad397462374408f82e27ff/preview%20(1).webp)
 - **Art direction / moodboard:** ![image alt](https://github.com/Tobias778/ghost-shift/blob/30efde08bec3199b4aaacd33f167fdc1c5c89681/preview.webp)
-- **Image 01 — Adsumsoft homepage inspiration:** ![home page](https://github.com/Tobias778/ghost-shift/blob/9a36e804031977fa0f929e2c8734415c93a62018/7cd70a44-4060-48de-8191-3f5ac4fc6824.png)
+- **Image 01 — Ayakasides homepage inspiration:** ![home page](https://github.com/Tobias778/ghost-shift/blob/9a36e804031977fa0f929e2c8734415c93a62018/7cd70a44-4060-48de-8191-3f5ac4fc6824.png)
 - **Image 02 — Stage 01 cipher interface:** ![homepage](https://github.com/Tobias778/ghost-shift/blob/b7fb845c38aac0ca06ad4310d8e29998f591af28/O7ex1B2-Oh3vkNRkdCbCN-Jtr8_qnlCzZMeuqDyES9BAxGaqvStIFvba0n4lsrnTquPqKH4OmJJEHuwKKOGABhbf_YnV5S65ztCYTiJO9QKv7us7gmqYXrxcjBmj4rzzjmmDyMLpR7KNkMmYNb5IyFSJMWoBGvatxecQyMzRTWvN3rpv47LIK1vIorJ6XQJT.jpg)
 - **Image 03 — Stage 02 vulnerable archive:** ![archive](https://github.com/Tobias778/ghost-shift/blob/55b9b917210509c5b30acee2c8e8b1c6aa6dcc22/images.jpg)
 - **Image 04 — Stage 03 surveillance / evidence capture:** ![watchdog](https://github.com/Tobias778/ghost-shift/blob/9a36e804031977fa0f929e2c8734415c93a62018/preview%20(3).webp)
