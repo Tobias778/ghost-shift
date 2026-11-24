@@ -191,14 +191,18 @@ The **PC or laptop** is mission control. The **phone** becomes your field device
 ![Assets](https://img.shields.io/badge/ASSETS-CONCEPT%20ART-8B5CF6?style=flat-square&labelColor=101820) ![Gallery](https://img.shields.io/badge/GALLERY-AWAITING%20UPLOAD-64748B?style=flat-square&labelColor=101820)
 
 - **Visual inspiration:** ![image alt](https://github.com/Tobias778/ghost-shift/blob/374959f0d8a0581664ad397462374408f82e27ff/preview%20(1).webp)
-- **Art direction / moodboard:** [Add colours, fonts, hacker-terminal references, and UI notes.]
-- **Image 01 — Adsumsoft homepage:** [Insert image or relative path: `![Homepage](assets/homepage.png)`]
-- **Image 02 — Stage 01 cipher interface:** [Insert image or GIF.]
-- **Image 03 — Stage 02 vulnerable archive:** [Insert image or GIF.]
-- **Image 04 — Stage 03 surveillance / evidence capture:** [Insert image or GIF.]
-- **Image 05 — Phone hacking controller:** [Insert image or GIF.]
-- **Credits / acknowledgements:** [Credit artwork, libraries, references, and collaborators.]
-
+- **Art direction / moodboard:** ![image alt](https://github.com/Tobias778/ghost-shift/blob/30efde08bec3199b4aaacd33f167fdc1c5c89681/preview.webp)
+- **Image 01 — Adsumsoft homepage:** ![home page](https://github.com/Tobias778/ghost-shift/blob/9a36e804031977fa0f929e2c8734415c93a62018/7cd70a44-4060-48de-8191-3f5ac4fc6824.png)
+- **Image 02 — Stage 01 cipher interface:** ![homepage](https://github.com/Tobias778/ghost-shift/blob/b7fb845c38aac0ca06ad4310d8e29998f591af28/O7ex1B2-Oh3vkNRkdCbCN-Jtr8_qnlCzZMeuqDyES9BAxGaqvStIFvba0n4lsrnTquPqKH4OmJJEHuwKKOGABhbf_YnV5S65ztCYTiJO9QKv7us7gmqYXrxcjBmj4rzzjmmDyMLpR7KNkMmYNb5IyFSJMWoBGvatxecQyMzRTWvN3rpv47LIK1vIorJ6XQJT.jpg)
+- **Image 03 — Stage 02 vulnerable archive:** ![archive](https://github.com/Tobias778/ghost-shift/blob/55b9b917210509c5b30acee2c8e8b1c6aa6dcc22/images.jpg)
+- **Image 04 — Stage 03 surveillance / evidence capture:** ![watchdog](https://github.com/Tobias778/ghost-shift/blob/9a36e804031977fa0f929e2c8734415c93a62018/preview%20(3).webp)
+- **Image 05 — Phone hacking controller:** ![Phone UI](https://github.com/Tobias778/ghost-shift/blob/9a36e804031977fa0f929e2c8734415c93a62018/55b0edec-321c-4d06-8753-e0db8327cd79.png)
+- **Credits / acknowledgements:** ChatGPT & Mr.Claude
+- **Inspiration**:
+- https://www.youtube.com/watch?v=1hpU_Neg1KA
+- https://store.steampowered.com/app/1141020/Adventure_Escape_Mysteries/
+- https://www.acunetix.com/websitesecurity/sql-injection/
+- https://www.youtube.com/watch?v=lS65X0U1rp4
 
 ### `// REPOSITORY SIGNAL TAGS //`
 
