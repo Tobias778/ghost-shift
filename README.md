@@ -209,7 +209,8 @@ The **PC or laptop** is mission control. The **phone** becomes your field device
 - https://www.scribd.com/document/845176893/Controlling-a-PC-Using-a-Mobile-Phone ( Reference Phone To PC )
 - https://dev.to/varundeva/access-localhost-on-mobile-within-the-same-network-4h7o
 - https://stackoverflow.com/questions/48179597/connect-to-live-html-preview-from-another-device-on-same-network
-  
+- https://dev.to/alvaromontoro/creating-an-interactive-image-gallery-with-html-and-css-35pi
+- https://www.youtube.com/watch?v=tsMHONmUkvI
 ### `// REPOSITORY SIGNAL TAGS //`
 
 <kbd>cybersecurity-game</kbd> <kbd>hacking-simulator</kbd> <kbd>ctf</kbd> <kbd>sql-injection</kbd> <kbd>cryptography</kbd> <kbd>puzzle-game</kbd> <kbd>dual-screen</kbd> <kbd>javascript</kbd> <kbd>fictional-world</kbd>
