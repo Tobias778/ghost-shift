@@ -163,9 +163,9 @@ The **PC or laptop** is mission control. The **phone** becomes your field device
 - [x] Stage 01 concept — Cipher decryption
 - [x] Stage 02 concept — SQL injection puzzle
 - [x] Stage 03 concept — Evidence capture and final confrontation
-- [ ] Add final gameplay screenshots / GIFs
-- [ ] Add verified setup and play instructions
-- [ ] Connect and polish the full three-stage experience
+- [x] Add final gameplay screenshots / GIFs
+- [x] Add verified setup and play instructions
+- [x] Connect and polish the full three-stage experience
 
 > **Training-environment notice:** Adsumsoft, Adrian Voss, Project DOMINION, and all in-game systems are fictional. The cybersecurity challenges are intended for an authorized, self-contained simulation—not real-world targets.
 
