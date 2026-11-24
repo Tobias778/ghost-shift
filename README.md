@@ -211,6 +211,8 @@ The **PC or laptop** is mission control. The **phone** becomes your field device
 - https://stackoverflow.com/questions/48179597/connect-to-live-html-preview-from-another-device-on-same-network
 - https://dev.to/alvaromontoro/creating-an-interactive-image-gallery-with-html-and-css-35pi
 - https://www.youtube.com/watch?v=tsMHONmUkvI
+- Inspiration for create a character with malicious idea: https://www.youtube.com/watch?v=geHhBl3yuXs
+  
 ### `// REPOSITORY SIGNAL TAGS //`
 
 <kbd>cybersecurity-game</kbd> <kbd>hacking-simulator</kbd> <kbd>ctf</kbd> <kbd>sql-injection</kbd> <kbd>cryptography</kbd> <kbd>puzzle-game</kbd> <kbd>dual-screen</kbd> <kbd>javascript</kbd> <kbd>fictional-world</kbd>
