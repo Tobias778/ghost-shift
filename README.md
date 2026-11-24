@@ -200,6 +200,7 @@ The **PC or laptop** is mission control. The **phone** becomes your field device
 - **Image 05 — Phone hacking controller:** ![Phone UI](https://github.com/Tobias778/ghost-shift/blob/9a36e804031977fa0f929e2c8734415c93a62018/55b0edec-321c-4d06-8753-e0db8327cd79.png)
 - **Credits / acknowledgements:** ChatGPT & Mr.Claude
 - **Inspiration**:
+- https://www.youtube.com/watch?v=MIzYnYfVcrc
 - https://www.youtube.com/watch?v=1hpU_Neg1KA
 - https://store.steampowered.com/app/1141020/Adventure_Escape_Mysteries/
 - https://www.acunetix.com/websitesecurity/sql-injection/
@@ -212,7 +213,7 @@ The **PC or laptop** is mission control. The **phone** becomes your field device
 - https://dev.to/alvaromontoro/creating-an-interactive-image-gallery-with-html-and-css-35pi
 - https://www.youtube.com/watch?v=tsMHONmUkvI
 - Inspiration for create a character with malicious idea: https://www.youtube.com/watch?v=geHhBl3yuXs
-  
+
 ### `// REPOSITORY SIGNAL TAGS //`
 
 <kbd>cybersecurity-game</kbd> <kbd>hacking-simulator</kbd> <kbd>ctf</kbd> <kbd>sql-injection</kbd> <kbd>cryptography</kbd> <kbd>puzzle-game</kbd> <kbd>dual-screen</kbd> <kbd>javascript</kbd> <kbd>fictional-world</kbd>
