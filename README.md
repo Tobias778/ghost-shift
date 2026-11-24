@@ -207,10 +207,3 @@ The **PC or laptop** is mission control. The **phone** becomes your field device
 ### `// REPOSITORY SIGNAL TAGS //`
 
 <kbd>cybersecurity-game</kbd> <kbd>hacking-simulator</kbd> <kbd>ctf</kbd> <kbd>sql-injection</kbd> <kbd>cryptography</kbd> <kbd>puzzle-game</kbd> <kbd>dual-screen</kbd> <kbd>javascript</kbd> <kbd>fictional-world</kbd>
-
-<details>
-<summary><strong>📡 OPEN TRANSMISSION — DEVELOPER NOTES</strong></summary>
-
-These tags can also be added to your GitHub repository under **About → Topics**. Badges above are visual labels, not live deployment or security-scan results. Replace concept-art placeholders with your own image paths as the project grows.
-
-</details>
