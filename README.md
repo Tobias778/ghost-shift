@@ -190,7 +190,7 @@ The **PC or laptop** is mission control. The **phone** becomes your field device
 
 ![Assets](https://img.shields.io/badge/ASSETS-CONCEPT%20ART-8B5CF6?style=flat-square&labelColor=101820) ![Gallery](https://img.shields.io/badge/GALLERY-AWAITING%20UPLOAD-64748B?style=flat-square&labelColor=101820)
 
-- **Visual inspiration:** [Add links to games, websites, interfaces, or GitHub projects that inspired the style.]
+- **Visual inspiration:** https://github.com/Tobias778/ghost-shift/blob/374959f0d8a0581664ad397462374408f82e27ff/preview%20(1).webp
 - **Art direction / moodboard:** [Add colours, fonts, hacker-terminal references, and UI notes.]
 - **Image 01 — Adsumsoft homepage:** [Insert image or relative path: `![Homepage](assets/homepage.png)`]
 - **Image 02 — Stage 01 cipher interface:** [Insert image or GIF.]
