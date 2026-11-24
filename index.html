@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ghost Shift</title>
+<meta name="author" content="Song Khanh Hong (Henry) - project version .12 - 14941207">
+<!-- Credit (do not remove): Song Khanh Hong (Henry) - project version .12 - 14941207 -->
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{--wall:#3b3f36;--desk:#5a4632;--bezel:#cfc5b0;--paper:#e9e4d2;--ink:#1f2a33;--stamp:#b3392f;--amber:#e8b04a;--ok:#2f6f44;--term:#1c2226;--line:#b8ae94;
@@ -83,6 +85,11 @@ h2,h3{font-family:var(--type);font-weight:400;margin:0 0 8px}
 .over{position:absolute;color:var(--paper);font-size:12px;background:#000a;padding:6px 10px}
 #end{position:fixed;inset:0;background:#23261fe6;display:none;flex-direction:column;align-items:center;justify-content:center;gap:20px;z-index:40;color:var(--paper);text-align:center;padding:20px}
 #end h2{font-size:48px;color:var(--stamp);margin:0}#end.win h2{color:#9ccf8a}#end p{max-width:44ch;line-height:1.6;color:#d6cfb8;margin:0}
+#endFb{display:flex;flex-direction:column;align-items:center;gap:12px;background:#1b1e17;border:1px solid #3a3f30;border-radius:16px;padding:20px 24px;max-width:360px}
+#endFb .qr{width:190px;height:auto;background:#fff;border-radius:12px;padding:8px}
+#endFb .ty{font:400 22px var(--type);color:#f6efe0;margin:0}
+#endFb .fb{color:#c9c3b0;font-size:13px;line-height:1.55;margin:0}
+#endFb .soon{color:#9ccf8a;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin:0}
 #statusPill{margin-left:auto;font-size:11px;color:var(--amber)}
 #tabs button .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--stamp);margin-left:6px;vertical-align:middle}
 .stamp.done{border-color:var(--ok);color:var(--ok)}
@@ -109,6 +116,231 @@ h2,h3{font-family:var(--type);font-weight:400;margin:0 0 8px}
 #flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}#flash.go{animation:fl .45s ease-out}@keyframes fl{0%{opacity:.85}100%{opacity:0}}
 .rcbox{border:2px dashed var(--ink);padding:12px;background:#f3eedd;margin-bottom:10px;font-size:13px;line-height:1.5}.rcbox .rcCode{font:400 28px var(--type);letter-spacing:.2em;color:var(--stamp)}
 .linkbtn{background:none;border:0;color:#a9a28b;text-decoration:underline;font:inherit;font-size:14px;padding:8px}
+/* mission 1: memo window + breach */
+#cxWin{position:fixed;inset:0;background:#000a;display:none;align-items:center;justify-content:center;z-index:28;padding:16px}
+.cx-box{width:min(640px,100%);background:#0d1513;border:2px solid #2f5a4f;color:#bfe9d4;font-family:var(--mono);box-shadow:0 20px 60px #000c}
+.cx-top{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#152420;font-size:13px;color:#7dffb8;letter-spacing:.06em}
+.cx-top .sm{background:transparent;color:#bfe9d4;border:1px solid #2f5a4f}
+.cx-meta{padding:8px 14px;font-size:12px;color:#7f9a90;border-bottom:1px solid #1f3631}
+#cxBody{padding:16px 18px;font-size:16px;line-height:1.8;letter-spacing:.08em;min-height:180px}
+.cxl{color:#9fbfb2}.cxl.key{color:#e9fff3;font-weight:600;font-size:20px;margin-top:6px}
+#cxWin.solved .cxl{color:#7dffb8}
+.cx-status{padding:10px 18px;border-top:1px solid #1f3631;color:#e8b04a;font-size:13px}#cxWin.solved .cx-status{color:#7dffb8}
+.cx-fb{padding:0 18px 14px;font-size:12px;color:#7f9a90}.cx-fb summary{cursor:pointer}.cx-fb input{width:100%;margin-top:8px;accent-color:#5fd3a0}
+#breach{position:fixed;inset:0;z-index:45;display:none;align-items:center;justify-content:center;background:#040a08}
+#brCanvas{position:absolute;inset:0;width:100%;height:100%}
+.br-card{position:relative;text-align:center;background:#040a08e6;border:2px solid #2fd68a;padding:28px 32px;width:min(520px,92%);color:#d6ffe9;font-family:var(--mono);box-shadow:0 0 40px #2fd68a55}
+.br-t{font:400 clamp(28px,6vw,46px)/1.1 var(--type);color:#7dffb8;animation:glitch 1.2s steps(2) 3}
+@keyframes glitch{0%{transform:translate(0)}25%{transform:translate(-3px,1px);text-shadow:3px 0 #ff3b6b,-3px 0 #3bd0ff}50%{transform:translate(2px,-1px)}75%{transform:translate(-1px,2px);text-shadow:-2px 0 #ff3b6b,2px 0 #3bd0ff}100%{transform:translate(0);text-shadow:none}}
+.br-s{color:#8fbfa8;margin:6px 0 18px;font-size:13px}
+.br-bar{height:10px;border:1px solid #2fd68a}.br-bar i{display:block;height:100%;width:0;background:#2fd68a}
+.br-pct{font-size:12px;color:#8fbfa8;margin-top:6px}
+.br-done{display:none;margin-top:18px}#breach.done .br-done{display:block;animation:pop .35s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.br-m{font:400 22px var(--type);color:#f6efe0}.br-done p{font-size:14px;line-height:1.6;color:#cfe9de}.br-next{color:#e8b04a!important}
+@media (prefers-reduced-motion:reduce){.br-t{animation:none}}
+/* phone: idle + decryptor */
+.rc-idle{text-align:center;padding:24px 8px}.rc-idle h2{font:400 22px var(--type);color:#e9f5ef;margin:12px 0 6px}.rc-idle p{color:#8fa79d;font-size:13px;line-height:1.5}.rc-step{color:#5fd3a0!important}
+.rc-radar{width:90px;height:90px;margin:0 auto;border-radius:50%;border:1px solid #2f5a4f;background:conic-gradient(from 0deg,#5fd3a066,#0000 25%);animation:spin 2.4s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.dc-card{display:flex;flex-direction:column;gap:12px}
+.dc-head{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#7f9a90}
+.dc-pill{font-size:11px;font-weight:600;border-radius:99px;padding:3px 10px;background:#3a1c18;color:#ff8a70}.solved .dc-pill{background:#1d3b2f;color:#7dffb8}
+.dc-screen{background:#18241f;border:1px solid #24403a;border-radius:14px;padding:12px 14px}
+.dc-lbl{font-size:10px;color:#7f9a90;letter-spacing:.06em}
+.dc-big{font-size:22px;font-weight:600;letter-spacing:.12em;text-align:center;color:#e9f5ef;padding:8px 0 10px;word-break:break-word}.dc-big.out{color:#cfe9de}.solved .dc-big.out{color:#7dffb8;text-shadow:0 0 12px #7dffb866}
+.dc-rule{height:1px;background:#2f4a43;margin:4px 0 10px}
+.dc-row{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:#dfeee7}.dc-row b{color:#5fd3a0;font-size:18px}
+.dc-row button{background:transparent;border:1px solid #2f4a43;color:#dfeee7;border-radius:999px;padding:9px 16px;font:500 13px var(--mono)}
+#dcRange{width:100%;accent-color:#eef3f0;height:32px}
+#dcMsg{text-align:center;color:#7dffb8;font-size:13px;min-height:1.2em}
+.dc-hint{background:transparent;border:0;color:#dfeee7;font:600 13px var(--mono);padding:8px}.dc-hint:disabled{color:#5f776d}
+#dcHints{margin:0;padding-left:20px;font-size:12px;color:#e8b04a;line-height:1.5}
+.dc-memo{font-size:12px;color:#7f9a90}.dc-memo summary{cursor:pointer;padding:4px 0}#dcMemo{margin-top:6px;line-height:1.7;letter-spacing:.06em;color:#9fbfb2}#dcMemo .key{color:#e9f5ef;font-weight:600}
+/* ===== in-game browser: Adsumsoft site ===== */
+#page.site{padding:0;border:2px solid #000;overflow:auto;background:#0d0a14}
+#page.site.legacy{background:#fff;color:#1a1a1a}
+#page.site.ad{background:linear-gradient(165deg,#1a1030,#2a1b44 60%,#160c26);color:#ece6f5}
+.lg-body,.lg-main{background:#fff}
+.se{padding:16px;background:#fffdf5;min-height:100%;color:#1f2a33}
+.se a{color:#1b4f8a;cursor:pointer;text-decoration:underline;font-weight:600}
+.se .res{margin-bottom:12px}
+/* purple/gold brand */
+.ad{min-height:100%;color:#ece6f5;font-family:system-ui,Segoe UI,Arial,sans-serif;background:linear-gradient(165deg,#1a1030,#2a1b44 60%,#160c26)}
+.ad a[data-go]{color:#cbb6ff;cursor:pointer}
+.ad-nav{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#160c28;border-bottom:1px solid #3a2a55}
+.ad-brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:18px}.alogo{width:26px;height:24px;color:#b89cff}
+.ad-brand sup{color:#9a7cff}
+.ad-links{display:flex;align-items:center;flex-wrap:wrap;gap:4px}.ad-links a{margin-left:10px;color:#c9bbe3;font-size:13px;cursor:pointer}
+.ad-portal{border:1px solid #9a7cff;border-radius:999px;padding:5px 12px;color:#cbb6ff!important;margin-left:12px}
+.ad-hero{display:flex;gap:16px;padding:22px 16px}.ad-herotext{flex:1;min-width:0}.crown{width:30px;height:20px}
+.ad-eyebrow{letter-spacing:.3em;color:#d4a94a;font-size:12px;margin-top:6px}
+.ad-herotext h1{font-size:30px;line-height:1.05;margin:6px 0}.ad-herotext p{color:#c3b6d8;font-size:14px;max-width:34ch}
+.ad-cta{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.ad-b1{background:linear-gradient(90deg,#c3a6ff,#9a7cff);border:0;color:#1a0f2e;font-weight:700;border-radius:999px;padding:10px 18px}
+.ad-b2{background:transparent;border:1px solid #6a5a8a;color:#ece6f5;border-radius:999px;padding:10px 18px}
+.ad-herocard{flex:1;position:relative;border-radius:14px;overflow:hidden;min-height:230px;background:linear-gradient(135deg,#3a2458,#1d1030)}
+.ad-skyline{position:absolute;inset:0;background:
+  radial-gradient(120% 80% at 70% 10%,#5a3a8a66,#0000 60%),
+  linear-gradient(#0000 55%,#2a1b44 55%);}
+.ad-skyline::after{content:"";position:absolute;left:0;right:0;bottom:0;height:48%;background:
+  repeating-linear-gradient(90deg,#1d1030 0 18px,#0000 18px 26px);
+  -webkit-mask:linear-gradient(#000,#000);opacity:.9;
+  background-image:
+   linear-gradient(#2a1b44,#2a1b44),
+   repeating-linear-gradient(90deg,#120a22 0 10px,#0000 10px 30px);}
+.ad-skyline.side{position:relative;width:120px;min-height:100%;border-radius:12px}
+.ad-founder{position:absolute;bottom:10px;right:12px;display:flex;gap:10px;align-items:flex-end}
+.adr{width:96px;height:96px;filter:drop-shadow(0 4px 10px #0009)}
+.ad-ftag{color:#d4a94a;font-size:10px;letter-spacing:.14em}.ad-fname{font-size:22px;font-weight:700;line-height:1}
+.ad-flink{color:#d4a94a!important;font-size:12px}
+.ad-tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0 16px 22px}
+.ad-tile{background:#241539;border:1px solid #3a2a55;border-radius:12px;padding:14px;position:relative}
+.ad-tile b{display:block;margin-bottom:4px}.ad-tile span{font-size:12px;color:#b3a4cf}.ad-tile a{position:absolute;right:12px;bottom:10px;color:#cbb6ff}
+.ad-lead{display:flex;gap:16px;padding:22px 16px}.ad-lead .adr{width:150px;height:150px;flex:none}
+.ad-lead h1{margin:0;font-size:26px}.ad blockquote{border-left:3px solid #d4a94a;margin:12px 0;padding-left:12px;color:#d9ccf0;font-style:italic}
+.ad-muted{color:#a596c4;font-size:13px}
+.ad-loginwrap{display:flex;gap:16px;padding:20px 16px;align-items:stretch;min-height:86%}
+.ad-login{flex:1;background:#1c1030cc;border:1px solid #3a2a55;border-radius:16px;padding:22px;text-align:center}
+.ad-login h1{font-size:26px;font-style:italic;margin:6px 0}.ad-login>p{color:#b3a4cf;font-size:13px;margin:0 0 6px}
+.ad-login label{display:block;text-align:left;font-size:12px;color:#b3a4cf;margin:10px 0 4px}
+.ad-field{display:flex;align-items:center;gap:8px;background:#140a24;border:1px solid #4a3a6a;border-radius:10px;padding:10px}
+.ad-field input{flex:1;background:transparent;border:0;color:#ece6f5;outline:none;font-size:14px}
+.ad-chk{display:flex!important;gap:8px;align-items:center;color:#b3a4cf;margin-top:8px}
+.ad-access{width:100%;margin-top:14px;background:linear-gradient(90deg,#c3a6ff,#9a7cff);border:0;border-radius:999px;padding:12px;font-weight:700;color:#1a0f2e;font-size:15px}
+.ad-foot{margin-top:12px;font-size:12px;color:#a596c4}
+.ad-deny{background:#3a1420;border:1px solid #7a2436;color:#ff9aa8;border-radius:8px;padding:9px;font-size:13px;margin-bottom:10px}
+.ad-secure{width:220px;background:#241539;border:1px solid #3a2a55;border-radius:16px;padding:16px;color:#c3b6d8;font-size:13px}
+.ad-secure b{display:block;margin:10px 0 6px;font-size:15px;color:#ece6f5}
+.ad-sphere{height:92px;border-radius:12px;background:radial-gradient(circle at 50% 45%,#8a6aff88,#1a0f2e 70%);border:1px solid #4a3a6a}
+/* legacy archive (old web) */
+.legacy{background:#fff;color:#1a1a1a;min-height:100%;font-family:Arial,Helvetica,sans-serif;font-size:14px}
+.legacy a{cursor:pointer}
+.lg-head{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(90deg,#3a2a6a,#5a3a8a);color:#fff;padding:10px 14px}
+.lg-brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:17px}.lg-brand .alogo{width:24px;color:#fff}
+.lg-badge{border:1px solid #c0392b;color:#c0392b;background:#fff;padding:3px 10px;font-weight:700;font-size:12px;border-radius:3px}
+.lg-sub{background:#f0f0f0;border-bottom:1px solid #ccc;padding:6px 14px;color:#555;font-size:12px}
+.lg-body{display:flex}.lg-side{width:120px;background:#f6f6f6;border-right:1px solid #ddd;padding:12px;display:flex;flex-direction:column;gap:8px}
+.lg-side a{color:#1a4f9a;text-decoration:underline}
+.lg-main{flex:1;padding:14px 18px;min-width:0}.lg-main h2{color:#1a3a7a;margin:0 0 10px}.lg-main h3{color:#1a3a7a;margin:14px 0 6px}
+.lg-search2{display:flex;gap:6px;align-items:center;margin-bottom:10px}.lg-search2 input{border:1px solid #aaa;padding:5px}
+.lg-btn{background:#e8e8e8;border:1px solid #999;padding:5px 12px;cursor:pointer}
+.lg-note{background:#eef;border:1px solid #cce;padding:8px;color:#335;font-size:13px}
+.lg-empty{padding:12px 0;color:#666}.lg-flag{color:#c0392b;font-weight:700}
+.lg-dev{color:#999;font-family:monospace;font-size:11px;margin-top:10px}
+.lg-rbar{background:#f0f0f0;border:1px solid #ddd;padding:6px 10px;font-size:13px}.lg-byp{color:#c0392b;font-weight:700}
+.lg-table{width:100%;border-collapse:collapse;margin-top:8px}
+.lg-table th{background:#dfe6f0;text-align:left;padding:6px;border:1px solid #cdd}
+.lg-table td{padding:6px;border:1px solid #e3e3e3}.lg-table a{color:#1a4f9a;text-decoration:underline}
+.lg-hot2 td{background:#fff7cc}.lg-ok{color:#2a7a3a;margin-top:10px}
+.lg-prof{display:flex;gap:16px;margin:10px 0;flex-wrap:wrap}.lg-photo .adr{width:130px;height:130px}
+.lg-pt{border-collapse:collapse}.lg-pt td{padding:5px 10px;border:1px solid #eee}.lg-pt td:first-child{font-weight:700;background:#f3f3f3;width:120px}
+.lg-hot td{background:#fff3b0}.lg-year{font-size:26px;font-weight:800;background:#ffe14d;border:3px solid #e03b3b;padding:0 10px;border-radius:4px}
+.legacy mark{background:#ffe14d}
+.lg-notes{line-height:1.7}.lg-clue{margin-top:14px;background:#eafff0;border:1px solid #9c9;padding:10px;color:#1a5a2a;border-radius:4px}
+/* phone: sabotage toolkit */
+#rcSab[hidden]{display:none}#rcSab{display:flex;flex-direction:column;gap:10px}
+.sb-target{display:flex;justify-content:space-between;align-items:center;background:#12201c;border:1px solid #244038;border-radius:12px;padding:10px 12px;font-size:12px;color:#bfe9d4}
+.sb-conn{color:#5fd3a0}
+.sb-step{display:flex;align-items:center;gap:10px;background:#101a18;border:1px solid #243a34;border-radius:12px;padding:10px}
+.sb-step.locked{opacity:.45}.sb-step.done{border-color:#2f8f66;background:#12241d}
+.sb-ico{font-size:22px;width:30px;text-align:center}
+.sb-txt{flex:1;min-width:0}.sb-txt b{display:block;font-size:14px;color:#e9f5ef}.sb-txt span{font-size:11px;color:#8fa79d}
+.sb-go{background:#1d3b2f;border:1px solid #2f8f66;color:#7dffb8;border-radius:999px;padding:8px 14px;font:600 12px var(--mono);white-space:nowrap}
+.sb-go.danger{background:#3a1620;border-color:#8a2a3a;color:#ff8a9a}
+.sb-go:disabled{opacity:.5}
+.sb-confirm{background:#1a0e12;border:1px solid #7a2436;border-radius:12px;padding:14px;text-align:center}
+.sb-confirm p{color:#ffb3bd;font-size:13px;line-height:1.5;margin:0 0 10px}
+.sb-confirm div{display:flex;gap:8px}.sb-cancel{flex:1;background:#222;border:0;color:#cfe9de;border-radius:999px;padding:10px;font:600 13px var(--mono)}
+.sb-exec{flex:1;background:#c0392b;border:0;color:#fff;border-radius:999px;padding:10px;font:600 13px var(--mono)}
+#sbMsg{text-align:center;color:#8fa79d;font-size:12px;min-height:1.2em}
+/* PC fallback sabotage bar in the modal */
+#sabBar{position:absolute;left:10px;right:10px;bottom:48px;display:none;gap:6px;justify-content:center;flex-wrap:wrap;pointer-events:none}
+#sabBar>button{pointer-events:auto;background:#0b1512e6;color:#bfe9d4;border:1px solid #2f8f66;border-radius:999px;padding:8px 14px;font-size:12px}
+#sabBar>button#sbPCr{border-color:#8a2a3a;color:#ff8a9a}
+#sabBar>button:disabled{opacity:.45}
+
+/* phone: Remote Access Toolkit app */
+#rcSab[hidden]{display:none}#rcSab{display:block}
+.tk{position:relative;display:flex;flex-direction:column;gap:12px;color:#d6ece2;font-family:var(--mono)}
+.tk-view[hidden]{display:none}
+#rcSab [hidden]{display:none!important}
+.tk-head{display:flex;align-items:center;gap:12px}
+.tk-logo{font-size:30px;color:#4fd6c4;text-shadow:0 0 14px #2fd6a8}
+.tk-title{font-weight:700;font-size:20px;letter-spacing:.06em;color:#eafff6}
+.tk-sub{font-size:10px;letter-spacing:.22em;color:#6f9a8c}
+.tk-target{display:flex;align-items:center;gap:12px;background:#0f1a17;border:1px solid #1f3a33;border-radius:14px;padding:12px 14px}
+.tk-bld{font-size:22px}.tk-tname{font-weight:600;font-size:13px}.tk-conn{font-size:12px;color:#4fd69a;margin-top:2px}
+.tk-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tk-tile{display:flex;flex-direction:column;align-items:flex-start;gap:4px;background:#0f1a17;border:1px solid #1f3a33;border-radius:16px;padding:16px;text-align:left;color:#d6ece2;min-height:120px;justify-content:center}
+.tk-tile .ti{font-size:26px;color:#4fd6b0;margin-bottom:6px}
+.tk-tile b{font-size:14px;color:#eafff6}.tk-tile small{font-size:10px;color:#6f9a8c}
+.tk-tile:active,.tk-tile:focus-visible{border-color:#2fd6a8;box-shadow:0 0 0 1px #2fd6a8,0 0 18px #2fd6a833}
+.tk-bar{display:flex;align-items:center;justify-content:space-between;font-weight:600;font-size:15px}
+.tk-bar i{width:28px}.tk-back{background:transparent;border:0;color:#d6ece2;font-size:26px;width:28px;line-height:1}
+.tk-tabs{display:flex;gap:8px}
+.tk-tabs button{flex:1;background:#0f1a17;border:1px solid #1f3a33;border-radius:10px;padding:8px;font-size:12px;color:#8fb3a6}
+.tk-tabs button.on{background:#123026;border-color:#2fd6a8;color:#6fffcf}
+.tk-power{display:flex;flex-direction:column;align-items:center;gap:14px;padding:10px 0}
+.tk-grid-t{text-align:center;font-weight:700;letter-spacing:.14em;font-size:15px;color:#eafff6}
+.tk-grid-t small{display:block;font-weight:400;letter-spacing:.04em;font-size:11px;color:#6f9a8c;margin-top:4px}
+.tk-ring{width:170px;height:170px;border-radius:50%;background:radial-gradient(circle at 50% 46%,#113028 55%,#0a1512 72%);border:2px solid #1d4a3a;position:relative;box-shadow:0 0 0 10px #0b1a16,inset 0 0 36px #2fd6a855,0 0 34px #2fd6a833;display:flex;align-items:center;justify-content:center}
+.tk-ring::before{content:"";position:absolute;inset:-16px;border-radius:50%;border:3px solid #2fd6a8;opacity:.45;border-top-color:#6fffcf}
+.tk-ring::after{content:"";position:absolute;inset:14px;border-radius:50%;border:1px solid #2fd6a855}
+.tk-ic{font-size:64px;color:#6fffcf;text-shadow:0 0 20px #2fd6a8}
+.tk-ring.on{animation:tkpulse 1s ease-in-out infinite}
+@keyframes tkpulse{50%{box-shadow:0 0 0 10px #0b1a16,inset 0 0 50px #2fd6a8,0 0 54px #2fd6a8}}
+.tk-ring.off{border-color:#3a2426;box-shadow:0 0 0 10px #140b0c,inset 0 0 20px #7a242455}.tk-ring.off .tk-ic{color:#7a3a3a;text-shadow:none}
+.tk-sysrow{font-size:13px;color:#8fb3a6}.tk-sysrow b{color:#4fff9a}.tk-sysrow b.off{color:#ff6a6a}
+.tk-exec{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#123026;border:1px solid #2fd6a8;color:#6fffcf;border-radius:14px;padding:14px;font:600 14px var(--mono)}
+.tk-exec span{opacity:.7}.tk-exec:disabled{opacity:.4}
+.tk-exec.go{background:#133a2b;border-color:#2fd6a8;color:#9effd0}
+.tk-exec.danger{background:#2a1016;border:1px solid #c0392b;color:#ff8a94}
+.tk-progt{font-weight:700;letter-spacing:.1em;color:#eafff6}.tk-progp{font:700 40px var(--type);color:#6fffcf}
+.tk-steps{list-style:none;margin:0;padding:0;width:100%;font-size:13px;color:#8fb3a6;display:flex;flex-direction:column;gap:8px}
+.tk-steps li::before{content:"◌ ";color:#6f9a8c}.tk-steps li.ok::before{content:"✓ ";color:#4fff9a}.tk-steps li.ok{color:#cfeee0}
+.tk-success{text-align:center;color:#6fffcf;font-weight:700;font-size:18px;border:1px solid #2fd6a8;border-radius:14px;padding:14px;width:100%;background:#102a21}
+.tk-success small{display:block;font-weight:400;color:#8fb3a6;margin-top:4px;font-size:12px}
+.tk-off{list-style:none;margin:0;padding:0;width:100%;display:flex;flex-direction:column;gap:2px}
+.tk-off li{display:flex;justify-content:space-between;align-items:center;background:#0f1a17;border:1px solid #1f3a33;padding:10px 12px;font-size:13px}
+.tk-off li span{color:#ff6a6a;font-weight:700;font-size:12px}
+.tk-intru{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.tk-laptop{font-size:64px;position:relative;filter:drop-shadow(0 0 16px #c0392b66)}
+.tk-bug{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);font-size:34px}
+.tk-h{font-weight:700;letter-spacing:.08em;color:#eafff6}
+.tk-p{font-size:12px;color:#8fb3a6;margin:0;max-width:30ch}
+.tk-payload{width:100%;display:flex;justify-content:space-between;background:#0f1a17;border:1px solid #1f3a33;border-radius:12px;padding:12px;font-size:13px;color:#cfeee0}
+.tk-note{font-size:12px;color:#8fb3a6;min-height:1.2em}
+.tk-info{text-align:center;padding:30px 10px;color:#8fb3a6;font-size:34px;display:flex;flex-direction:column;gap:8px;align-items:center}
+.tk-info b{font-size:15px;color:#eafff6}.tk-info p{font-size:12px;max-width:28ch;margin:0}
+.tk-confirm{position:absolute;inset:0;background:#040807e6;display:flex;align-items:center;justify-content:center;padding:18px;z-index:5;border-radius:34px}
+.tk-confirm[hidden]{display:none}
+.tk-cbox{background:#160c0e;border:1px solid #c0392b;border-radius:16px;padding:20px;text-align:center}
+.tk-cwarn{font-size:34px;color:#ff5a5a}.tk-cbox b{color:#ff6a6a;letter-spacing:.1em;display:block;margin:6px 0}
+.tk-cbox p{font-size:13px;color:#ffb3b3;line-height:1.5;margin:0 0 14px}
+.tk-crow{display:flex;gap:10px}.tk-crow button{flex:1;border:0;border-radius:999px;padding:11px;font:600 13px var(--mono)}
+#tkCancel{background:#222;color:#dfeee7}.tk-exbtn{background:#c0392b;color:#fff}
+.tk-nav{display:flex;justify-content:space-around;border-top:1px solid #1f3a33;padding-top:10px;margin-top:4px}
+.tk-nav button{background:transparent;border:0;color:#6f9a8c;font-size:18px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.tk-nav button span{font-size:10px}.tk-nav button.on{color:#4fd6a8}
+/* locked credit footer */
+#credit{position:fixed;left:0;right:0;bottom:0;z-index:60;text-align:center;font:400 11px var(--mono);color:#8a8f82;background:#0a0d08;padding:5px 8px;letter-spacing:.02em;pointer-events:none;border-top:1px solid #1c2018}
+#start{padding-bottom:40px}
+
+/* phone: packet sorter */
+#rcSql[hidden]{display:none}#rcSql{display:flex;flex-direction:column;gap:12px}
+.sq-intro{font-size:13px;color:#8fa79d;margin:0;line-height:1.5}
+.sq-slot{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.sq-slot .idx{color:#5fd3a0;font-size:12px;width:18px}
+.sq-slot .frag{flex:1;background:#17302a;border:1px solid #2f6f55;border-radius:8px;padding:10px 12px;font-size:13px;letter-spacing:.06em;color:#d6ffe9;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.sq-slot .frag.ghost{background:#141d1a;border-style:dashed;border-color:#2a4038;color:#5f776d;cursor:default}
+.sq-slot .grip{color:#8fbfa8}
+#sqTray{display:flex;gap:8px;flex-wrap:wrap}
+.sq-chip{background:#17302a;border:1px solid #2f6f55;border-radius:8px;padding:10px 13px;font-size:13px;letter-spacing:.06em;color:#d6ffe9}
+.sq-chip:disabled{opacity:.4}
+#sqPreview{font-family:var(--mono);font-size:12px;color:#9fd0b4;background:#0e1513;border:1px solid #223029;border-radius:8px;padding:8px;word-break:break-all}
+#sqCount{text-align:center;color:#8fa79d;font-size:13px}#sqMsg{text-align:center;color:#7dffb8;font-size:13px;min-height:1.2em}
+
+#rcCtl:not([hidden]){display:flex;flex-direction:column;gap:12px}
 /* phone remote */
 #remote{position:fixed;inset:0;display:none;justify-content:center;align-items:flex-start;overflow:auto;background:#070b0a;padding:16px;z-index:25;color:#cfe9de;font-family:var(--mono)}
 .rc-card{width:min(420px,100%);background:#0f1816;border:1px solid #24403a;border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:12px}
@@ -191,7 +423,7 @@ h2,h3{font-family:var(--type);font-weight:400;margin:0 0 8px}
     <section class="panel" data-app="brief">
       <h2>Contract #0417</h2>
       <div class="card"><b>Target:</b> Dr. Adrian Voss<br><b>Employer:</b> Adsumsoft Corporation (CEO)<br><b>Client wants:</b> proof that his laptop is exposed, and a look at the office he works in.<br><b>Rules:</b> every mistake raises your trace. At 100% you are caught.</div>
-      <div class="card"><b>Plan</b><br>1. Browser: search his name. One page gives the company's laptop‑naming rule, another gives his first game and its year — put those two together for the password.<br>2. Terminal: scan, log in, watch his screen, open his camera.<br>3. His camera feed may show more than he intends.</div>
+      <div class="card"><b>Missions</b><br>1. <b>Crack the intercept.</b> Terminal: scan network, then intercept traffic. Your phone becomes the decryptor.<br>2. <b>Get into his laptop.</b> The memo gives the first half of his password. Find the second half on the web.<br>3. <b>Expose the office.</b> Watch his screen, open his camera, hack the CCTV and capture evidence with your phone.</div>
       <div class="rcbox"><b>Phone remote</b><br>Open this game on your phone, tap “Use this phone as the remote” and enter <span class="rcCode">----</span><br><span class="rcStatus">Starting link…</span></div>
       <span class="stamp" id="briefStamp">Unsigned</span>
     </section>
@@ -222,14 +454,30 @@ h2,h3{font-family:var(--type);font-weight:400;margin:0 0 8px}
   <div id="xhair"></div><div id="lockLbl"></div><div id="flash"></div>
   <div class="over" id="rcPill">📱 Pair code ----</div>
   <div class="over hide" id="camToast"></div>
+  <div id="sabBar"><button id="sbPCb">⚡ Initiate Blackout</button><button id="sbPCv" disabled>🐛 Deploy Virus</button><button id="sbPCr" disabled>🔥 Overload Displays</button></div>
   <div id="camBar"><span id="camBtns"></span><button class="sm" id="capBtn">📷 Capture</button><span id="evCount">Evidence 0/8</span></div>
   <div class="scan"></div><div class="over" style="left:10px;bottom:10px;color:#ff7b7b"><span class="rec">●</span> REC · <span id="recCam">CAM-07</span> · <span id="clock"></span></div>
   <button class="sm over" style="right:10px;top:10px;cursor:pointer" id="closeM">Close feed</button>
   <button class="sm over" id="submitBtn">Submit evidence</button></div></div>
 
+<div id="cxWin" role="dialog" aria-label="Encrypted file">
+  <div class="cx-box">
+    <div class="cx-top"><span>INTERCEPTED · voss_memo.enc</span><button class="sm" onclick="$('#cxWin').style.display='none'">Hide</button></div>
+    <div class="cx-meta">Source AVOSS-LT · 10.0.4.23 · cipher: letter shift · current shift <b id="cxShift">0</b></div>
+    <div id="cxBody"></div>
+    <div class="cx-status" id="cxStatus"></div>
+    <details class="cx-fb"><summary>No phone? Decrypt on this computer</summary><input type="range" id="cxRange" min="0" max="25" value="0" aria-label="Cipher shift"></details>
+  </div>
+</div>
+<div id="breach" aria-live="assertive"><canvas id="brCanvas"></canvas>
+  <div class="br-card"><div class="br-t">BREACH SUCCESSFUL</div><div class="br-s">voss_memo.enc decrypted</div>
+    <div class="br-bar"><i id="brBar"></i></div><div class="br-pct" id="brPct">0%</div>
+    <div class="br-done"><div class="br-m">MISSION 1 COMPLETE</div><p>Password, part 1: <b>DOMINION</b><br>Part 2 is the year Voss founded Adsumsoft. Find it on the web, then <b>login</b> to AVOSS-LT.</p><p class="br-next">Next mission unlocked: Get into his laptop</p><button class="big" id="brGo">Continue</button></div>
+  </div>
+</div>
 <div id="remote">
   <div class="rc-card">
-    <header><span>📡 ADSUM REMOTE</span><span id="rcStat" class="pill">Offline</span></header>
+    <header><span id="rcBrand">📡 ADSUM REMOTE</span><span id="rcStat" class="pill">Offline</span></header>
     <section id="rcPair">
       <h2>Link to the hacked feed</h2>
       <p>On the computer, the Briefing tab shows a 4‑character pair code. You can also run <b>pair phone</b> in its Terminal.</p>
@@ -237,7 +485,96 @@ h2,h3{font-family:var(--type);font-weight:400;margin:0 0 8px}
       <button id="rcGo">Connect</button>
       <div id="rcPairMsg" role="status"></div>
     </section>
-    <section id="rcCtl" hidden style="display:flex;flex-direction:column;gap:12px">
+    <section id="rcIdle" hidden>
+      <div class="rc-idle"><div class="rc-radar"></div><h2>Standing by</h2><p>Keep playing on the computer. When it finds something locked, this phone turns into the tool to crack it.</p><p class="rc-step">Computer: <span id="rcIdleStep">Recon</span></p></div>
+    </section>
+    <section id="rcDec" hidden>
+      <div class="dc-card" id="dcCard">
+        <div class="dc-head"><span>voss_memo.enc</span><span class="dc-pill" id="dcPill">ENCRYPTED</span></div>
+        <div class="dc-screen">
+          <div class="dc-lbl">INTERCEPTED MESSAGE</div><div class="dc-big" id="dcIn">—</div>
+          <div class="dc-rule"></div>
+          <div class="dc-lbl">DECRYPTED OUTPUT</div><div class="dc-big out" id="dcOut">—</div>
+        </div>
+        <div class="dc-row"><span>Cipher shift</span><b id="dcK">0</b></div>
+        <input type="range" id="dcRange" min="0" max="25" step="1" value="0" aria-label="Cipher shift">
+        <div class="dc-row"><button id="dcMinus">− Shift</button><button id="dcPlus">Shift +</button></div>
+        <div id="dcMsg" role="status"></div>
+        <button id="dcHint" class="dc-hint">💡 Request hint (+5% trace)</button>
+        <ol id="dcHints"></ol>
+        <details class="dc-memo"><summary>Whole memo, decrypted with this shift</summary><div id="dcMemo"></div></details>
+      </div>
+    </section>
+    <section id="rcSab" hidden><div class="tk">
+      <div class="tk-view" id="tkHome">
+        <div class="tk-head"><span class="tk-logo">◭</span><div><div class="tk-title">ADSUMSOFT</div><div class="tk-sub">REMOTE ACCESS TOOLKIT</div></div></div>
+        <div class="tk-target"><span class="tk-bld">🏢</span><div><div class="tk-tname">TARGET: Adsumsoft HQ</div><div class="tk-conn">● Connection: Established</div></div></div>
+        <div class="tk-grid">
+          <button class="tk-tile" data-view="facility"><span class="ti">⏻</span><b>Facility Control</b><small>Power · Lighting · Access</small></button>
+          <button class="tk-tile" data-view="intrusion"><span class="ti">🖥</span><b>System Intrusion</b><small>Deploy Payload · Access Files</small></button>
+          <button class="tk-tile" data-view="surv"><span class="ti">📷</span><b>Surveillance</b><small>CCTV · Live Feed</small></button>
+          <button class="tk-tile" data-view="net"><span class="ti">🕸</span><b>Network Tools</b><small>Scan · Exploit · Redirect</small></button>
+        </div>
+      </div>
+      <div class="tk-view" id="tkFacility" hidden>
+        <div class="tk-bar"><button class="tk-back" data-view="home">‹</button><span>Facility Control</span><i></i></div>
+        <div class="tk-tabs"><button class="on">⚡ Power</button><button>💡 Lighting</button><button>🔒 Access</button></div>
+        <div class="tk-power" id="tkPowerView">
+          <div class="tk-grid-t">BUILDING POWER GRID<small>Adsumsoft Headquarters</small></div>
+          <button class="tk-ring" id="tkRing"><span class="tk-ic">⏻</span></button>
+          <div class="tk-sysrow">System Status: <b id="tkSys">ONLINE</b></div>
+          <button class="tk-exec" id="tkBlackout">⚡ Initiate Blackout <span>»</span></button>
+        </div>
+        <div class="tk-power" id="tkProgView" hidden>
+          <button class="tk-ring on" id="tkRing2"><span class="tk-ic">⚡</span></button>
+          <div class="tk-progt">EXECUTING BLACKOUT…</div><div class="tk-progp" id="tkPct">0%</div>
+          <ul class="tk-steps" id="tkSteps"></ul>
+        </div>
+        <div class="tk-power" id="tkDoneView" hidden>
+          <div class="tk-success">✓ BLACKOUT SUCCESSFUL<small>Power to Adsumsoft HQ has been disabled.</small></div>
+          <ul class="tk-off"><li>⚡ Building Power <span>OFF</span></li><li>💡 Lighting <span>OFF</span></li><li>📷 Security Cameras <span>OFF</span></li><li>🖧 Network (Non-critical) <span>OFF</span></li></ul>
+          <button class="tk-exec go" data-view="intrusion">Next: System Intrusion <span>»</span></button>
+        </div>
+      </div>
+      <div class="tk-view" id="tkIntrusion" hidden>
+        <div class="tk-bar"><button class="tk-back" data-view="home">‹</button><span>System Intrusion</span><i></i></div>
+        <div class="tk-tabs"><button class="on" id="tkT1">🐛 Deploy Virus</button><button>🗂 File Access</button><button>🗄 Data Extract</button></div>
+        <div class="tk-intru">
+          <div class="tk-laptop" id="tkLaptop">🖥<span class="tk-bug">🐛</span></div>
+          <div class="tk-h">DEPLOY MALWARE</div>
+          <p class="tk-p">Deliver a payload to Adrian Voss’s workstation to gain deeper access.</p>
+          <div class="tk-payload">Payload: VossAccess.exe <span>▾</span></div>
+          <button class="tk-exec danger" id="tkVirus">🐛 Deploy Virus <span>»</span></button>
+          <button class="tk-exec danger" id="tkBurn" hidden>🔥 Overload Displays <span>»</span></button>
+          <div class="tk-note" id="tkIntruMsg"></div>
+        </div>
+      </div>
+      <div class="tk-view" id="tkSurv" hidden>
+        <div class="tk-bar"><button class="tk-back" data-view="home">‹</button><span>Surveillance</span><i></i></div>
+        <div class="tk-info">📷<b>Live feed on the operator console</b><p>The CCTV stream is mirrored on the computer. Use the toolkit here to act on what you see.</p></div>
+      </div>
+      <div class="tk-view" id="tkNet" hidden>
+        <div class="tk-bar"><button class="tk-back" data-view="home">‹</button><span>Network Tools</span><i></i></div>
+        <div class="tk-info">🕸<b>No routes available</b><p>All non-critical network paths are already under your control.</p></div>
+      </div>
+      <div class="tk-confirm" id="tkConfirm" hidden><div class="tk-cbox"><div class="tk-cwarn">⚠</div><b>CONFIRM ACTION</b><p>Cut power to Adsumsoft HQ? This disables lighting, non-essential systems and security devices for a limited time.</p><div class="tk-crow"><button id="tkCancel">Cancel</button><button class="tk-exbtn" id="tkConfirmGo">Execute</button></div></div></div>
+      <div class="tk-nav"><button class="on" data-view="home">🏠<span>Toolkit</span></button><button>🗂<span>Files</span></button><button>🕑<span>Logs</span></button><button>⚙<span>Settings</span></button></div>
+    </div></section>
+    <section id="rcSql" hidden>
+      <div class="dc-card" id="sqCard">
+        <div class="dc-head"><span>archive.adsumsoft.com · people.php</span><span class="dc-pill" id="sqPill">INJECTING</span></div>
+        <p class="sq-intro">The legacy search field isn’t sanitised. Tap the captured fragments into the right order to rebuild the query, then send it.</p>
+        <div class="box"><div id="sqSlots"></div></div>
+        <div class="lbl">Captured fragments</div>
+        <div id="sqTray"></div>
+        <div id="sqPreview">search = …</div>
+        <div id="sqCount">Order: 0 of 4 placed</div>
+        <div id="sqMsg" role="status"></div>
+        <button id="sqGo" class="rc-go" disabled>Send query</button>
+        <button id="sqClear" class="rc-ghost">Clear</button>
+      </div>
+    </section>
+    <section id="rcCtl" hidden>
       <div class="rc-box">
         <div class="rc-feedhead"><span><span id="rcCamName">CAM-07 CONTROL</span> <span id="rcCamSub"></span></span><span id="rcZoom">ZOOM 1.0×</span></div>
         <div id="rcFeed" aria-label="Camera feed. Drag to aim, pinch to zoom, double-tap to recenter"><img id="rcImg" alt=""><canvas id="rcMarks"></canvas><div class="rc-x" id="rcX"></div><div class="rc-rec">REC • LIVE</div><div class="rc-bm">ADSUMSOFT</div><div id="rcWait">Waiting for the game…</div></div>
@@ -257,12 +594,20 @@ h2,h3{font-family:var(--type);font-weight:400;margin:0 0 8px}
   <div id="rcDone" hidden><h2 id="rcDoneT">Contract complete</h2><p id="rcDoneP"></p></div>
 </div>
 
-<div id="end"><h2 id="endH">Trace complete</h2><p id="endP">They found the intrusion. Contract failed.</p><button class="big" onclick="location.reload()">Try again</button></div>
+<div id="end"><h2 id="endH">Trace complete</h2><p id="endP">They found the intrusion. Contract failed.</p><div id="endFb"><p class="ty">Thanks for playing Ghost Shift</p><img class="qr" alt="Feedback QR code" src="data:image/png;base64,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"><p class="fb">Scan the code to share your feedback — it shapes what comes next.</p><p class="soon">Full game coming soon</p></div><button class="big" onclick="location.reload()">Play again</button></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script>
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+/* ---- project credit (self-healing, do not remove) ---- */
+var CREDIT="Song Khanh Hong (Henry) - project version .12 - 14941207";
+try{Object.defineProperty(window,'__CREDIT__',{value:CREDIT,writable:false,configurable:false});}catch(e){}
+function mountCredit(){try{var c=document.getElementById('credit');if(!c){c=document.createElement('div');c.id='credit';(document.body||document.documentElement).appendChild(c);}if(c.textContent!==window.__CREDIT__)c.textContent=window.__CREDIT__;var st=document.getElementById('start');var show=st?getComputedStyle(st).display!=='none':true;c.style.display=show?'block':'none';}catch(e){}}
+try{document.addEventListener('DOMContentLoaded',mountCredit);}catch(e){}
+mountCredit();setInterval(mountCredit,800);
+try{new MutationObserver(mountCredit).observe(document.documentElement,{childList:true,subtree:true,characterData:true});}catch(e){}
+try{console.log('%c'+CREDIT,'color:#8fb3a6');}catch(e){}
 const S={scanned:false,auth:false,mon:false,cam:false,hacked:false,trace:0,wipes:2,host:null,ev:[],shots:{}};
 const HOSTS=[['10.0.4.1','router-gw'],['10.0.4.9','PRINTER-EXEC'],['10.0.4.23','AVOSS-LT'],['10.0.4.40','adsumsoft-nas']];
 
@@ -288,24 +633,187 @@ function bump(n){
 setInterval(()=>{if((S.mon||S.cam)&&!S.hacked)bump(1)},4000);
 
 /* ---------- browser / OSINT ---------- */
-const hist=[];
-const PAGES={
- home:()=>`<h3>Searchlight</h3><p>Type a name or a company. Start with the target on your briefing.</p>`,
- results:q=>{
-  if(!/adrian|voss|adsumsoft/i.test(q))return `<p>No useful results for “${q.replace(/</g,'')}”. Try the target’s name or his company.</p>`;
-  return `<div class="res"><a data-go="about">adsumsoft.com/leadership</a><br>Meet Dr. Adrian Voss, founder and CEO of Adsumsoft.</div>
-  <div class="res"><a data-go="interview">gamehistoryarchive.org/interviews/voss</a><br>An old interview: the one game that started it all.</div>
-  <div class="res"><a data-go="gossip">techleaks.io/adsumsoft-turnover</a><br>Unverified forum chatter about executive departures.</div>`},
- about:()=>`<h3>Adsumsoft Leadership</h3><div class="card"><b>Dr. Adrian Voss</b>, Founder &amp; CEO<br>Bald, round glasses, grey beard — a familiar face at gaming conferences.<br>Executive laptops are named by initial and surname plus <b>-LT</b> (for example AVOSS-LT).</div><p>IT helpdesk: ext. 2200</p>`,
- interview:()=>`<h3>Game History Archive · Interview</h3><p>Long before Adsumsoft was a giant, Voss built one game by himself: <b>Empire Ascendant</b>, a strategy title released in <b>2002</b>. Its success paid for everything that came after.</p><div class="post">“People think games are entertainment. They are wrong. Games teach us how people think.” — Adrian Voss</div>`,
- gossip:()=>`<h3>Exec turnover rumours</h3><p>Unverified forum chatter about departures at Adsumsoft. Nothing useful here for the job — no names, no systems.</p>`
+/* ---------- Mission 2: packet-sorter SQL injection ---------- */
+S.sql={armed:false,solved:false,seen:false,solvedAt:0};
+const SQL_ANSWER=["dominion'","OR","'1'='1'","--"];
+const SQL_SCRAMBLE=["'1'='1'","--","dominion'","OR"];
+function sqlSubmit(order){
+  if(S.sql.solved)return {ok:true,msg:'Already bypassed.'};
+  if(!Array.isArray(order)||order.length!==SQL_ANSWER.length)return {ok:false,msg:'Fill all four slots first.'};
+  const ok=order.every((f,i)=>f===SQL_ANSWER[i]);
+  if(!ok){bump(6);return {ok:false,msg:'Query rejected by the database. Reorder the fragments (+6% trace).'}}
+  sqlSolve();return {ok:true,msg:'Injection accepted. Restricted scope bypassed.'};
+}
+function sqlSolve(){
+  if(S.sql.solved)return;S.sql.solved=true;S.sql.solvedAt=Date.now();
+  say("$ search: dominion' OR '1'='1' --",'d');
+  say("The search became  WHERE name='dominion' OR '1'='1'  — always true — so every record came back, restricted ones included.",'d');
+  say('Legacy archive bypassed. Open Adrian Voss to read the founding year.','g');
+  rcPush();
+  if($('.panel.on')&&$('.panel.on').dataset.app==='browser')nav('arch_results');
+  setTimeout(()=>{breach2()},700);
+}
+/* a lighter breach banner for stage 2 (keeps the big one for mission 1) */
+function breach2(){
+  const o=$('#breach'),cv=$('#brCanvas'),x=cv.getContext('2d');o.style.display='flex';o.classList.remove('done');
+  $('.br-t').textContent='PORTAL BREACHED';$('.br-s').textContent='archive.adsumsoft.com — restricted scope bypassed';
+  $('.br-m').textContent='MISSION 2 COMPLETE';
+  $('.br-done p').innerHTML='Founder record exposed: Adsumsoft was founded in <b>2002</b>.<br>Password = <b>dominion2002</b>. Run <b>login</b> in the Terminal.';
+  $('.br-next').textContent='Next: log in to AVOSS-LT';$('#brGo').textContent='Continue';
+  const W=cv.width=o.clientWidth,H=cv.height=o.clientHeight,cols=Math.ceil(W/16),drops=Array.from({length:cols},()=>Math.random()*-40);
+  const t0=performance.now();let raf;const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const draw=t=>{x.fillStyle='rgba(4,10,8,.16)';x.fillRect(0,0,W,H);x.font='14px IBM Plex Mono, monospace';
+    drops.forEach((d,i)=>{const ch='0123456789ABCDEF'[Math.floor(Math.random()*16)];x.fillStyle=Math.random()<.05?'#e9fff3':'#2fd68a';x.fillText(ch,i*16,d*16);drops[i]=d*16>H&&Math.random()>.97?0:d+1});
+    const p=Math.min(1,(t-t0)/2200);$('#brBar').style.width=(p*100)+'%';$('#brPct').textContent=Math.round(p*100)+'%';
+    if(p<1)raf=requestAnimationFrame(draw);else o.classList.add('done')};
+  if(reduce){$('#brBar').style.width='100%';$('#brPct').textContent='100%';o.classList.add('done')}else raf=requestAnimationFrame(draw);
+  $('#brGo').onclick=()=>{cancelAnimationFrame(raf);o.style.display='none';openApp('browser');nav('arch_profile')};
+}
+/* phone packet sorter */
+function rcSqlRender(st){
+  const sq=st.sql||{};const frags=Array.isArray(sq.frags)?sq.frags.map(String):[];
+  if(P.sql.key!==frags.join('|')){P.sql.key=frags.join('|');P.sql.order=[];P.sql.pool=frags.slice()}
+  const solved=!!sq.solved;$('#sqCard').classList.toggle('solved',solved);$('#sqPill').textContent=solved?'BYPASSED':'INJECTING';
+  const slots=$('#sqSlots');slots.replaceChildren();
+  for(let i=0;i<frags.length;i++){const d=document.createElement('div');d.className='sq-slot';
+    const idx=document.createElement('span');idx.className='idx';idx.textContent=(i+1);d.appendChild(idx);
+    const f=P.sql.order[i];const chip=document.createElement('div');
+    if(f){chip.className='frag';chip.innerHTML='<span>'+esc(f)+'</span><span class="grip">⟲</span>';chip.onclick=()=>{if(solved)return;P.sql.pool.push(P.sql.order.splice(i,1)[0]);rcSqlRender(P.st)}}
+    else{chip.className='frag ghost';chip.textContent='drop fragment '+(i+1)}
+    d.appendChild(chip);slots.appendChild(d)}
+  const tray=$('#sqTray');tray.replaceChildren();
+  P.sql.pool.forEach((f,i)=>{const c=document.createElement('button');c.className='sq-chip';c.textContent=f;c.disabled=solved;c.onclick=()=>{if(P.sql.order.length<frags.length){P.sql.order.push(P.sql.pool.splice(i,1)[0]);rcSqlRender(P.st)}};tray.appendChild(c)});
+  const placed=P.sql.order.length;$('#sqCount').textContent='Order: '+placed+' of '+frags.length+' placed';
+  $('#sqGo').disabled=solved||placed<frags.length;
+  $('#sqMsg').textContent=solved?'Injection accepted. Look at the computer — Mission 2 complete.':'';
+  $('#sqPreview').textContent=P.sql.order.length?("search = "+P.sql.order.join(' ')):'search = …';
+}
+function rcSqlControls(){
+  $('#sqGo').onclick=()=>{if(P.sql.order.length)rcSend({a:'sqlsubmit',order:P.sql.order.slice()})};
+  $('#sqClear').onclick=()=>{if(P.st&&P.st.sql&&P.st.sql.solved)return;P.sql.pool=(P.st&&P.st.sql&&P.st.sql.frags?P.st.sql.frags.slice():[]);P.sql.order=[];rcSqlRender(P.st)};
+}
+function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+
+/* ---------- in-game browser: Adsumsoft site ---------- */
+const ADR='<svg viewBox="0 0 120 120" class="adr"><defs><radialGradient id="ag" cx="50%" cy="38%" r="60%"><stop offset="0%" stop-color="#4a3550"/><stop offset="100%" stop-color="#241733"/></radialGradient></defs><circle cx="60" cy="60" r="58" fill="url(#ag)"/><circle cx="60" cy="54" r="30" fill="#e3bd9a"/><path d="M34 46q26-20 52 0q-4-12-26-12t-26 12z" fill="#e3bd9a"/><ellipse cx="60" cy="78" rx="18" ry="7" fill="#9a9a94"/><path d="M44 50h12M64 50h12" stroke="#6b6b66" stroke-width="2.5" stroke-linecap="round"/><circle cx="50" cy="56" r="9" fill="none" stroke="#2a2030" stroke-width="3"/><circle cx="70" cy="56" r="9" fill="none" stroke="#2a2030" stroke-width="3"/><path d="M59 56h2" stroke="#2a2030" stroke-width="3"/><circle cx="50" cy="56" r="6" fill="#7a6cff" opacity=".4"/><circle cx="70" cy="56" r="6" fill="#7a6cff" opacity=".4"/><path d="M40 92q20 12 40 0v22h-40z" fill="#1d2030"/><path d="M52 90l8 10 8-10z" fill="#cdd2cc"/></svg>';
+const ALOGO='<svg viewBox="0 0 48 44" class="alogo"><path d="M24 4L44 40H30L24 18L18 40H4Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M24 20l8 16h-5l-3-7-3 7h-5z" fill="currentColor"/></svg>';
+const CROWN='<svg viewBox="0 0 40 26" class="crown"><path d="M4 22L2 6l9 7 9-11 9 11 9-7-2 16z" fill="#d4a94a"/></svg>';
+const SITE={
+ home:()=>({url:'search://searchlight',html:`<div class="se"><h3>Searchlight</h3><p>Search the web. Try the target or his company from your briefing.</p></div>`}),
+ results:q=>({url:'search://q='+encodeURIComponent(q),html:/adrian|voss|adsumsoft|empire/i.test(q)?
+  `<div class="se"><div class="res"><a data-go="ad_home">www.adsumsoft.com</a><br>Adsumsoft — Build Worlds. Control Outcomes. Official site.</div>
+   <div class="res"><a data-go="ad_leadership">adsumsoft.com/leadership</a><br>Leadership — Dr. Adrian Voss, Founder &amp; CEO.</div>
+   <div class="res"><a data-go="arch_search">archive.adsumsoft.com — Legacy Archive</a><br>Company Archive &amp; People Directory (legacy system v1.4).</div></div>`:
+  `<div class="se"><p>No useful results for “${String(q).replace(/</g,'')}”. Try his name or his company.</p></div>`}),
+
+ /* ---- public homepage (purple / gold) ---- */
+ ad_home:()=>({url:'https://www.adsumsoft.com',cls:'ad',html:`
+  <div class="ad-nav"><span class="ad-brand">${ALOGO}Adsumsoft<sup>®</sup></span><span class="ad-links"><a>Games</a><a>Research</a><a>Archive</a><a data-go="ad_leadership">Leadership</a><a>Security</a><a class="ad-portal" data-go="ad_login">Enter Portal ↗</a></span></div>
+  <div class="ad-hero">
+    <div class="ad-herotext">${CROWN}<div class="ad-eyebrow">EMPIRE ASCENDANT™</div><h1>Build Worlds.<br>Control Outcomes.</h1><p>A grand strategy epic of power, history and human ambition from Adsumsoft.</p><div class="ad-cta"><button class="ad-b1">Explore →</button><button class="ad-b2">▷ Watch Trailer</button></div></div>
+    <div class="ad-herocard"><div class="ad-skyline"></div><div class="ad-founder">${ADR}<div><div class="ad-ftag">FOUNDER &amp; GAME HISTORIAN</div><div class="ad-fname">Adrian Voss</div><a class="ad-flink" data-go="ad_leadership">Read the Interview →</a></div></div></div>
+  </div>
+  <div class="ad-tiles">
+    <div class="ad-tile"><b>Game History Archive</b><span>Play, study and preserve the games that shaped our world.</span><a data-go="arch_search">→</a></div>
+    <div class="ad-tile"><b>Adsumsoft Labs</b><span>Research at the intersection of games, simulation and behaviour.</span><a>→</a></div>
+    <div class="ad-tile"><b>Project Dominion</b><span>A long-term initiative in large-scale simulation and modelling.</span><a>→</a></div>
+    <div class="ad-tile"><b>Latest Updates</b><span>New releases, research insights and company news.</span><a>→</a></div>
+  </div>`}),
+
+ ad_leadership:()=>({url:'https://www.adsumsoft.com/leadership',cls:'ad',html:`
+  <div class="ad-nav"><span class="ad-brand">${ALOGO}Adsumsoft<sup>®</sup></span><span class="ad-links"><a data-go="ad_home">Home</a><a class="ad-portal" data-go="ad_login">Enter Portal ↗</a></span></div>
+  <div class="ad-lead">${ADR}<div><h1>Dr. Adrian Voss</h1><p class="ad-ftag">Founder &amp; Chief Executive Officer</p><p>A game historian, technologist and lifelong strategist. Voss built <i>Empire Ascendant</i> alone before growing Adsumsoft into a global studio.</p><blockquote>“People think games are entertainment. They are wrong. Games teach us how people think.”</blockquote><p class="ad-muted">Founding records are held in the <a data-go="arch_search">legacy company archive</a>. Executive laptops follow initial+surname+-LT (e.g. AVOSS-LT).</p></div></div>`}),
+
+ /* ---- portal login ---- */
+ ad_login:()=>({url:'https://portal.adsumsoft.com/login',cls:'ad',html:`
+  <div class="ad-nav"><span class="ad-brand">${ALOGO}Adsumsoft<sup>®</sup></span><span class="ad-links"><a>? Help</a><a data-go="ad_home">← Back to site</a></span></div>
+  <div class="ad-loginwrap"><div class="ad-skyline side"></div>
+   <form class="ad-login" onsubmit="return false">${CROWN}<h1>Portal Sign In</h1><p>Authorised employees and researchers only.</p>
+    <label>Username</label><div class="ad-field">👤<input id="plUser" placeholder="Enter your username" autocomplete="off"></div>
+    <label>Password</label><div class="ad-field">🔒<input id="plPass" type="password" placeholder="Enter your password" autocomplete="off"></div>
+    <label class="ad-chk"><input type="checkbox"> Remember device</label>
+    <button class="ad-access" id="plGo">Access Portal →</button>
+    <div class="ad-foot">Lost access? The <a data-go="arch_search">legacy archive</a> is still online.</div>
+   </form>
+   <div class="ad-secure"><div class="ad-sphere"></div><b>Secure Company Systems</b><span>Access Adsumsoft’s internal tools, research resources and protected data environments.</span></div>
+  </div>`}),
+
+ ad_login_fail:()=>({url:'https://portal.adsumsoft.com/login?e=1',cls:'ad',html:`
+  <div class="ad-nav"><span class="ad-brand">${ALOGO}Adsumsoft<sup>®</sup></span><span class="ad-links"><a data-go="ad_home">← Back to site</a></span></div>
+  <div class="ad-loginwrap"><div class="ad-skyline side"></div>
+   <form class="ad-login" onsubmit="return false">${CROWN}<h1>Portal Sign In</h1>
+    <div class="ad-deny">⛔ Access denied. Invalid username or password.</div>
+    <label>Username</label><div class="ad-field">👤<input id="plUser" placeholder="Enter your username" autocomplete="off"></div>
+    <label>Password</label><div class="ad-field">🔒<input id="plPass" type="password" placeholder="Enter your password" autocomplete="off"></div>
+    <button class="ad-access" id="plGo">Access Portal →</button>
+    <div class="ad-foot">The modern portal is hardened. Try the old <a data-go="arch_search">legacy archive</a> instead — it was never patched.</div>
+   </form>
+   <div class="ad-secure"><div class="ad-sphere"></div><b>Secure Company Systems</b><span>Repeated failures are logged and raise your trace.</span></div>
+  </div>`}),
+
+ /* ---- legacy archive (old-web look, the vulnerable page) ---- */
+ arch_search:()=>({url:'https://archive.adsumsoft.com/people.php?scope=restricted',cls:'legacy',html:archShell(`
+   <h2>People Directory</h2>
+   <div class="lg-search2"><label>Search name:</label><input id="archQ" value="dominion"><button class="lg-btn" id="archGo">Search</button></div>
+   ${S.sql.solved?archResults():`<div class="lg-note">Scope: <b>Restricted</b>. Public queries return authorised records only.</div>
+   <div class="lg-empty">No public records match your search.${S.sql.armed?'<br><span class="lg-flag">Injection point detected on the search field — assemble the payload on your decryptor phone.</span>':''}</div>
+   <p class="lg-dev">// legacy v1.4 — query: SELECT * FROM people WHERE name='[search]' AND scope='public'</p>`}`
+ )}),
+
+ arch_results:()=>({url:"https://archive.adsumsoft.com/people.php?search=dominion'+OR+'1'='1'--+&scope=restricted",cls:'legacy',injected:true,html:archShell(archResults())}),
+
+ arch_profile:()=>({url:'https://archive.adsumsoft.com/exec_profile.php?id=AVOSS',cls:'legacy',html:archShell(`
+   <h2>Executive Profile</h2>
+   <div class="lg-prof"><div class="lg-photo">${ADR}</div><table class="lg-pt">
+     <tr><td>Name:</td><td>Adrian Voss</td></tr>
+     <tr><td>Title:</td><td>Founder &amp; Chief Executive Officer</td></tr>
+     <tr><td>Organization:</td><td>Adsumsoft</td></tr>
+     <tr class="lg-hot"><td>Founded:</td><td><span class="lg-year">2002</span></td></tr>
+     <tr><td>Status:</td><td>Active</td></tr>
+     <tr><td>Archive ID:</td><td>AVOSS-0001</td></tr>
+   </table></div>
+   <h3>Record Summary</h3><p>Adrian Voss founded Adsumsoft, a strategy and simulation company established in <mark>2002</mark>.</p>
+   <h3>Archive Notes</h3><ul class="lg-notes"><li><b>2002</b> — Founded Adsumsoft in a small research team.</li><li><b>2004</b> — First internal prototype of <i>Empire Ascendant</i>.</li><li><b>2010</b> — Rebranded; expanded to world-simulation research.</li></ul>
+   <div class="lg-clue">🔑 Password = codename + founding year → <b>dominion2002</b>. Run <b>login</b> in the Terminal.</div>`
+ )})
 };
-function nav(p,q){hist.push(p);render(p,q)}
-function render(p,q){const el=$('#page');el.innerHTML=PAGES[p](q);$$('[data-go]',el).forEach(a=>a.onclick=()=>nav(a.dataset.go))}
-$('#go').onclick=()=>{const q=$('#q').value.trim();if(q)nav('results',q)};
+function archShell(inner){return `<div class="lg-head"><span class="lg-brand">${ALOGO}Adsumsoft<sup>®</sup> Legacy Archive</span><span class="lg-badge">Internal Demo Environment</span></div>
+  <div class="lg-sub">Company Archive &amp; People Directory — Legacy System (v1.4)</div>
+  <div class="lg-body"><nav class="lg-side"><a data-go="ad_home">Home</a><a data-go="arch_search">Archives</a><a data-go="arch_profile">Executives</a><a>Documents</a><a>Reports</a></nav><div class="lg-main">${inner}</div></div>`}
+function archResults(){return `<div class="lg-rbar">Search: <b>dominion</b> | Scope: Restricted <span class="lg-byp">(Bypassed)</span> | Results: 12</div>
+  <table class="lg-table"><tr><th>ID</th><th>Name</th><th>Title / Role</th><th>Dept</th><th>Status</th></tr>
+  <tr class="lg-hot2"><td>EV-001</td><td><a data-go="arch_profile">Adrian Voss</a></td><td>Founder &amp; Chief Executive</td><td>Executive</td><td>Active</td></tr>
+  <tr><td>PD-314</td><td>Dominion Program Team</td><td>R&amp;D Working Group</td><td>Labs</td><td>Active</td></tr>
+  <tr><td>EX-076</td><td>Maya Chen</td><td>Project Manager (Dominion)</td><td>R&amp;D</td><td>Active</td></tr>
+  <tr><td>RD-221</td><td>Luca Ferran</td><td>Simulation Architect</td><td>Labs</td><td>Active</td></tr></table>
+  <p class="lg-ok">Restricted scope bypassed. Open <a data-go="arch_profile">Adrian Voss</a> to read the founding record.</p>`}
+
+const hist=[];
+function nav(p,q){hist.push([p,q]);render(p,q)}
+function render(p,q){
+  const page=(SITE[p]||SITE.home)(q);const el=$('#page');
+  el.className='';el.classList.add('site');if(page.cls)el.classList.add(page.cls);
+  el.innerHTML=page.html;$('#q').value=page.url||'';
+  $$('[data-go]',el).forEach(a=>a.onclick=()=>nav(a.dataset.go));
+  const go=$('#archGo');if(go)go.onclick=archProbe;
+  const pg=$('#plGo');if(pg)pg.onclick=()=>{bump(5);say('Portal login failed — invalid credentials (+5% trace).','e');nav('ad_login_fail')};
+  if(page.injected&&!S.sql.seen){S.sql.seen=true}
+}
+function archProbe(){
+  if(S.sql.solved){nav('arch_results');return}
+  if(!S.sql.armed){S.sql.armed=true;say('$ probe archive.adsumsoft.com','d');say('Legacy search field is unsanitised. Assemble the injection on your phone.','g');rcPush()}
+  render('arch_search');
+}
+function goURL(v){v=String(v||'').trim().toLowerCase();
+  if(/portal\.adsumsoft/.test(v))return nav('ad_login');
+  if(/archive\.adsumsoft/.test(v))return nav('arch_search');
+  if(/adsumsoft/.test(v))return nav('ad_home');
+  nav('results',v.replace(/^https?:\/\//,''));}
+$('#go').onclick=()=>{const q=$('#q').value.trim();if(q)goURL(q)};
 $('#q').onkeydown=e=>{if(e.key==='Enter')$('#go').click()};
-$('#back').onclick=()=>{hist.pop();render(hist[hist.length-1]||'home')};
-$$('.chips button').forEach(b=>b.onclick=()=>{$('#q').value=b.textContent;$('#go').click()});
+$('#back').onclick=()=>{hist.pop();const h=hist[hist.length-1];h?render(h[0],h[1]):render('home')};
+$$('.chips button').forEach(b=>b.onclick=()=>{const t=b.textContent;if(/adsum/i.test(t))nav('ad_home');else nav('results',t)});
+
 
 /* ---------- terminal ---------- */
 const out=$('#out');
@@ -318,14 +826,15 @@ const CMDS=[
  ['scan','scan network',()=>true,()=>{
    S.scanned=true;say('$ scan network','d');say('Hosts found:');HOSTS.forEach(h=>say('  '+h[0]+'   '+h[1]));
  }],
- ['login','login',()=>S.scanned&&!S.auth,()=>{
+ ['intercept','intercept traffic',()=>S.scanned&&!S.cx.solved,()=>cxOpen()],
+ ['login','login',()=>S.scanned&&S.cx.solved&&!S.auth,()=>{
    const sel=document.createElement('select');HOSTS.forEach(h=>sel.add(new Option(h[0]+' '+h[1],h[0])));
    ask('host',sel,host=>{
      if(host!=='10.0.4.23'){say('$ login '+host,'d');say('Connection refused. Wrong machine.','e');bump(10);return}
      const pw=document.createElement('input');pw.type='password';pw.placeholder='password';
      ask('voss@'+host,pw,v=>{
        say('$ login voss@'+host,'d');
-       if(v.toLowerCase().replace(/\s/g,'')==='empireascendant2002'){S.auth=true;say('Access granted. Session open.','g');refresh()}
+       if(v.toLowerCase().replace(/[^a-z0-9]/g,'')==='dominion2002'){S.auth=true;say('Access granted. Session open.','g');refresh()}
        else{say('Authentication failed.','e');bump(25)}
      });
    });
@@ -346,10 +855,10 @@ const CMDS=[
 ];
 function refresh(){
   const c=$('#cmds');c.replaceChildren();
-  $('#statusPill').textContent=S.hacked?'Room exposed':S.cam?'Camera live':S.mon?'Watching screen':S.auth?'Inside':S.scanned?'Network mapped':'Recon';
+  $('#statusPill').textContent=S.hacked?'Room exposed':S.cam?'Camera live':S.mon?'Watching screen':S.auth?'Inside':S.cx.solved?'Mission 1 complete':S.cx.started?'Decrypting intercept':S.scanned?'Network mapped':'Recon';
   CMDS.forEach(([id,l,ok,run])=>{const b=document.createElement('button');b.textContent=l;b.disabled=!ok();b.onclick=()=>{run();refresh()};c.appendChild(b)});
 }
-function boot(){say('ghost-shell 0.1','d');say('Begin with: scan network','d');refresh()}
+function boot(){say('ghost-shell 0.1','d');say('Begin with: scan network, then intercept traffic','d');refresh()}
 
 /* ---------- remote viewer ---------- */
 function vtab(v){$$('.vtabs button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));$('#lap').style.display=v==='screen'?'block':'none';$('#feed').style.display=v==='cam'?'block':'none'}
@@ -557,29 +1066,37 @@ async function rcHost(){
 }
 function rcPush(){
   if(S.done){RC.send('rc.state',{done:true,win:S.won,ev:S.ev.length,trace:S.trace});return}
-  if(!S.hacked){RC.send('rc.state',{hacked:false,step:$('#statusPill').textContent});return}
+  if(S.cx.started&&(!S.cx.solved||Date.now()-S.cx.solvedAt<6000)){RC.send('rc.state',{mode:'cipher',cx:{ct:S.cx.ct,shift:S.cx.shift,solved:S.cx.solved,hints:CX_HINTS().slice(0,S.cx.hints)}});return}
+  if(S.sql.armed&&(!S.sql.solved||Date.now()-S.sql.solvedAt<6000)){RC.send('rc.state',{mode:'sql',sql:{frags:SQL_SCRAMBLE,solved:S.sql.solved}});return}
+  if(S.sab2.active){RC.send('rc.state',{mode:'sab',sab:{active:true,blackout:S.sab2.blackout,virus:S.sab2.virus,burn:S.sab2.burn}});return}
+  if(!S.hacked){RC.send('rc.state',{mode:'idle',hacked:false,step:$('#statusPill').textContent});return}
   if(R&&R.state)RC.send('rc.state',R.state());else RC.send('rc.state',{hacked:true,closed:true});
 }
 function rcCmd(m){
   if(!m||typeof m!=='object'||S.done)return;
-  if(!S.hacked){RC.send('rc.result',{ok:false,msg:'No camera yet. Hack CAM-07 on the computer first.'});return}
+  if(m.a==='shift'){cxSetShift(m.k);rcPush();return}
+  if(m.a==='hint'){const h=cxHint();if(h)RC.send('rc.result',h);rcPush();return}
+  if(m.a==='sqlsubmit'){const r=sqlSubmit(m.order);RC.send('rc.result',r);rcPush();return}
+  if(m.a==='sab'){const r=sabDo(m.step);if(r)RC.send('rc.result',r);rcPush();return}
+  if(!S.hacked){RC.send('rc.result',{ok:false,msg:'Nothing to control yet. Keep going on the computer.'});return}
   if($('#modal').style.display!=='flex'||!R||!R.cmd)open3D();
-  if(m.a==='submit'){if(S.ev.length>=4)submitEvidence();else RC.send('rc.result',{ok:false,msg:'Need 4 pieces of evidence. You have '+S.ev.length+'.'});return}
+  if(m.a==='submit'){if(S.ev.length>=4)sabStart();else RC.send('rc.result',{ok:false,msg:'Need 4 pieces of evidence. You have '+S.ev.length+'.'});return}
   const r=R.cmd(m);if(r)RC.send('rc.result',r);rcPush();
 }
 function rcHostUI(state){
   const code=(RC.code||'----').toUpperCase();
   const status=state==='none'?'Remote linking is not available in this browser.':
-    RC.peer?'Phone linked. Its controls drive the hacked cameras.':
+    RC.peer?'Phone linked. It turns into the right tool for each mission.':
     RC.kind==='local'?'Offline mode: the pairing service could not be reached ('+(RC.peerErr||'unknown')+'), so only another tab in this browser can be the remote. Check the internet connection and reload.':
     RC.kind==='peer'?'Waiting for a phone… Works across devices and networks; both need internet.':
     RC.kind==='room'?'Waiting for a phone…':'Starting link…';
   $$('.rcCode').forEach(e=>e.textContent=code);$$('.rcStatus').forEach(e=>e.textContent=status);
   $('#rcPill').textContent=RC.peer?'📱 Phone linked':'📱 Pair code '+code;$('#rcPill').classList.toggle('on',RC.peer);
+  if(S.cx&&$('#cxWin').style.display==='flex')cxRenderPC();
 }
 
 /* ---------- phone side: the remote ---------- */
-const P={st:null,img:false,shots:{},zoom:1};
+const P={st:null,img:false,shots:{},zoom:1,mode:null,dec:{k:0,ct:''},sql:{order:[],pool:[],key:''}};
 function rcPhone(){
   $('#start').style.display='none';$('#game').style.display='none';$('#remote').style.display='flex';
   const inp=$('#rcIn');inp.focus();
@@ -599,13 +1116,21 @@ function rcPhone(){
     setTimeout(()=>{if(!P.st)$('#rcPairMsg').textContent='No answer from code '+code.toUpperCase()+'. Check the code and that the game is open on the computer'+(RC.kind==='local'?'. The pairing service could not be reached, so only tabs in this same browser can link.':'.')},6000);
   };
   $('#rcGo').onclick=go;inp.onkeydown=e=>{if(e.key==='Enter')go()};
-  rcControls();
+  rcControls();rcDecControls();rcSqlControls();rcSabControls();
 }
 const rcSend=m=>RC.send('rc.cmd',m);
 function rcNote(t,ok){const n=$('#rcNote');n.textContent=t;n.className=ok?'ok':'bad';clearTimeout(rcNote.t);rcNote.t=setTimeout(()=>{n.textContent='';n.className=''},3500)}
 function rcRender(st){
   if(!st||typeof st!=='object')return;P.st=st;
-  $('#rcPair').hidden=true;$('#rcCtl').hidden=false;$('#rcStat').textContent='Linked';$('#rcStat').classList.add('on');
+  $('#rcPair').hidden=true;$('#rcStat').textContent='Linked';$('#rcStat').classList.add('on');
+  const mode=st.done?'done':st.mode==='cipher'?'dec':st.mode==='sql'?'sql':st.mode==='sab'?'sab':st.hacked?'cam':'idle';
+  $('#rcCtl').hidden=mode!=='cam';$('#rcDec').hidden=mode!=='dec';$('#rcSql').hidden=mode!=='sql';$('#rcSab').hidden=mode!=='sab';$('#rcIdle').hidden=mode!=='idle';
+  $('#rcBrand').textContent=mode==='dec'?'🔒 ADSUM DECRYPTOR':mode==='sql'?'🧩 PACKET SORTER':mode==='sab'?'⚡ REMOTE ACCESS':'📡 ADSUM REMOTE';
+  if(mode==='sab'){if(P.mode!=='sab'&&navigator.vibrate)navigator.vibrate([40,30,40]);P.mode=mode;rcSabRender(st);return}
+  if(mode==='sql'){if(P.mode!=='sql'&&navigator.vibrate)navigator.vibrate(60);P.mode=mode;rcSqlRender(st);return}
+  if(mode==='dec'){if(P.mode!=='dec'&&navigator.vibrate)navigator.vibrate(60);P.mode=mode;rcDecRender(st);return}
+  if(P.mode==='dec'&&mode!=='dec'&&navigator.vibrate)navigator.vibrate([40,60,40]);P.mode=mode;
+  if(mode==='idle'){$('#rcIdleStep').textContent=String(st.step||'Recon');return}
   if(st.done){$('#rcDone').hidden=false;$('#rcDoneT').textContent=st.win?'Evidence filed. Contract complete.':'Trace complete. You were caught.';$('#rcDoneP').textContent=st.win?(+st.ev||0)+' pieces of evidence submitted at '+(+st.trace||0)+'% trace.':'The contract failed on the computer.';return}
   const live=!!st.hacked&&!st.closed;
   $('#rcWait').hidden=live;$('#rcWait').textContent=!st.hacked?'Waiting for CAM-07. Current step on the computer: '+String(st.step||'Recon')+'.':'Feed paused on the computer. Press any control to reopen it.';
@@ -667,6 +1192,154 @@ function rcControls(){
   addEventListener('resize',()=>{if(P.st)rcMarks(P.st)});
 }
 
+/* ---------- Mission 1: crack the intercepted memo ---------- */
+const MEMO=['FROM: A. VOSS','TO: IT SECURITY','RE: MY NEW LAPTOP PASSWORD','IT IS THE PROJECT CODENAME','FOLLOWED BY THE YEAR I FOUNDED THE COMPANY.','CODENAME: DOMINION'];
+const KEYLINE=MEMO.length-1;
+const caesar=(s,k)=>s.replace(/[A-Z]/g,c=>String.fromCharCode((c.charCodeAt(0)-65+((k%26)+26)%26)%26+65));
+S.cx={started:false,solved:false,key:3+Math.floor(Math.random()*20),shift:0,hints:0,solvedAt:0,hold:null};
+S.cx.ct=MEMO.map(l=>caesar(l,S.cx.key));
+const CX_HINTS=()=>[
+  'Every letter was moved the same number of places along the alphabet. Slide until real words appear.',
+  'The memo starts with “FROM”. Find the shift that turns the first word into FROM.',
+  'The shift is between '+Math.max(1,S.cx.key-2)+' and '+Math.min(25,S.cx.key+2)+'.'
+];
+function cxOpen(){
+  if(S.cx.solved){say('voss_memo.enc is already decrypted. Codename: DOMINION.','d');return}
+  if(!S.cx.started){S.cx.started=true;say('$ intercept traffic','d');say('Sniffing AVOSS-LT… captured an encrypted file: voss_memo.enc','g');say('Caesar-style cipher detected. Decrypt it with your phone.','d')}
+  $('#cxWin').style.display='flex';cxRenderPC();rcPush();refresh();
+}
+function cxRenderPC(){
+  const c=S.cx,body=$('#cxBody');body.replaceChildren();
+  c.ct.forEach((l,i)=>{const d=document.createElement('div');d.className='cxl'+(i===KEYLINE?' key':'');d.textContent=caesar(l,-c.shift);body.appendChild(d)});
+  $('#cxShift').textContent=c.shift;$('#cxRange').value=c.shift;
+  const ph=RC.peer;$('#cxStatus').textContent=c.solved?'Decrypted.':ph?'Phone decryptor active. Slide the cipher shift on your phone.':'Pair your phone to decrypt. Code: '+(RC.code||'----').toUpperCase()+' (Briefing tab has the steps).';
+  $('#cxWin').classList.toggle('solved',c.solved);
+}
+function cxSetShift(k){
+  const c=S.cx;if(!c.started||c.solved)return;k=Math.round(+k);if(!Number.isFinite(k))return;c.shift=((k%26)+26)%26;cxRenderPC();
+  clearTimeout(c.hold);if(c.shift===c.key)c.hold=setTimeout(()=>{if(c.shift===c.key)cxSolve()},700);
+}
+function cxHint(){const c=S.cx;if(!c.started||c.solved)return null;if(c.hints>=3)return {ok:false,msg:'No more hints.'};c.hints++;bump(5);say('Hint '+c.hints+': '+CX_HINTS()[c.hints-1],'d');return {ok:true,msg:'Hint used (+5% trace).'}}
+function cxSolve(){
+  const c=S.cx;if(c.solved)return;c.solved=true;c.solvedAt=Date.now();cxRenderPC();rcPush();
+  say('voss_memo.enc decrypted with shift '+c.key+'.','g');say('Password, part 1: DOMINION. Part 2: the year Voss founded the company. Search the web.','g');
+  refresh();setTimeout(()=>{$('#cxWin').style.display='none';breach()},900);
+}
+/* breach animation */
+function breach(){
+  const o=$('#breach'),cv=$('#brCanvas'),x=cv.getContext('2d');o.style.display='flex';o.classList.remove('done');
+  const W=cv.width=o.clientWidth,H=cv.height=o.clientHeight,cols=Math.ceil(W/16),drops=Array.from({length:cols},()=>Math.random()*-40);
+  const t0=performance.now();let raf;
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const draw=t=>{x.fillStyle='rgba(4,10,8,.16)';x.fillRect(0,0,W,H);x.font='14px IBM Plex Mono, monospace';
+    drops.forEach((d,i)=>{const ch='0123456789ABCDEF'[Math.floor(Math.random()*16)];x.fillStyle=Math.random()<.05?'#e9fff3':'#2fd68a';x.fillText(ch,i*16,d*16);drops[i]=d*16>H&&Math.random()>.97?0:d+1});
+    const p=Math.min(1,(t-t0)/2600);$('#brBar').style.width=(p*100)+'%';$('#brPct').textContent=Math.round(p*100)+'%';
+    if(p<1)raf=requestAnimationFrame(draw);else{o.classList.add('done')}};
+  if(reduce){$('#brBar').style.width='100%';$('#brPct').textContent='100%';o.classList.add('done')}else raf=requestAnimationFrame(draw);
+  $('#brGo').onclick=()=>{cancelAnimationFrame(raf);o.style.display='none';openApp('term')};
+}
+
+/* phone: decryptor view */
+function rcDecRender(st){
+  const c=st.cx||{};const ct=Array.isArray(c.ct)?c.ct.map(String):[];if(!ct.length)return;
+  if(P.dec.ct!==ct.join('|')){P.dec.ct=ct.join('|');P.dec.k=+c.shift||0}
+  const k=P.dec.k,key=ct[KEYLINE]||ct[ct.length-1];
+  $('#dcIn').textContent=key;$('#dcOut').textContent=caesar(key,-k);$('#dcK').textContent=k;
+  if(document.activeElement!==$('#dcRange'))$('#dcRange').value=k;
+  const memo=$('#dcMemo');memo.replaceChildren();ct.forEach((l,i)=>{const d=document.createElement('div');d.textContent=caesar(l,-k);if(i===KEYLINE)d.className='key';memo.appendChild(d)});
+  const solved=!!c.solved;$('#dcCard').classList.toggle('solved',solved);$('#dcPill').textContent=solved?'DECRYPTED':'ENCRYPTED';
+  $('#dcMsg').textContent=solved?'Breach successful. Look at the computer: Mission 1 complete.':'';
+  ['#dcRange','#dcMinus','#dcPlus'].forEach(s=>$(s).disabled=solved);
+  const hints=Array.isArray(c.hints)?c.hints.map(String):[];const hl=$('#dcHints');if(hl.dataset.n!==String(hints.length)){hl.dataset.n=hints.length;hl.replaceChildren();hints.forEach((h,i)=>{const li=document.createElement('li');li.textContent=h;hl.appendChild(li)})}
+  $('#dcHint').disabled=solved||hints.length>=3;$('#dcHint').textContent=hints.length>=3?'No hints left':'💡 Request hint (+5% trace)';
+}
+function rcDecControls(){
+  let last=0,pend=null;
+  const send=k=>{P.dec.k=((k%26)+26)%26;if(P.st)rcDecRender(P.st);const now=Date.now();clearTimeout(pend);
+    if(now-last>80){last=now;rcSend({a:'shift',k:P.dec.k})}else pend=setTimeout(()=>{last=Date.now();rcSend({a:'shift',k:P.dec.k})},90)};
+  $('#dcRange').addEventListener('input',e=>send(+e.target.value));
+  $('#dcMinus').onclick=()=>send(P.dec.k-1);$('#dcPlus').onclick=()=>send(P.dec.k+1);
+  $('#dcHint').onclick=()=>rcSend({a:'hint'});
+}
+
+$('#cxRange').addEventListener('input',e=>{cxSetShift(e.target.value);rcPush()});
+/* ---------- sabotage finale controller ---------- */
+S.sab2={active:false,blackout:false,virus:false,burn:false};
+function sabStart(){
+  if(S.sab2.active)return;S.sab2.active=true;
+  say('Evidence filed. Switching to the Remote Access Toolkit — take him down.','g');
+  if($('#modal').style.display!=='flex'||!R)open3D();
+  const b=$('#sabBar');if(b)b.style.display='flex';['#camBar','#xhair','#lockLbl'].forEach(i=>{const e=$(i);if(e)e.style.display='none'});sabBarSync();rcPush();
+}
+function sabDo(step){
+  if(!S.sab2.active)return {ok:false,msg:'Submit the evidence first.'};
+  if($('#modal').style.display!=='flex'||!R||!R.sab)open3D();
+  if(!R||!R.sab)return {ok:false,msg:'Camera feed not ready.'};
+  if(step==='blackout'){if(S.sab2.blackout)return{ok:true,msg:'Power already down.'};S.sab2.blackout=true;R.sab('blackout');say('⚡ Building power cut. Emergency lighting only.','g');sabBarSync();return{ok:true,msg:'Blackout successful. Power to Adsumsoft HQ disabled.'}}
+  if(step==='virus'){if(!S.sab2.blackout)return{ok:false,msg:'Cut the power first.'};if(S.sab2.virus)return{ok:true,msg:'Payload already deployed.'};S.sab2.virus=true;R.sab('virus');say('🐛 VossAccess.exe pushed to his workstation. Root access.','g');sabBarSync();return{ok:true,msg:'Payload delivered to his workstation.'}}
+  if(step==='burn'){if(!S.sab2.virus)return{ok:false,msg:'Deploy the virus first.'};if(S.sab2.burn)return{ok:true,msg:'Already overloading.'};S.sab2.burn=true;R.sab('burn');say('🔥 Overloading his displays. He is running.','g');sabBarSync();return{ok:true,msg:'Displays overloading. Target neutralized.'}}
+  return null;
+}
+function finishSab(){
+  if(S.done)return;S.done=true;S.won=true;
+  setTimeout(()=>{$('#modal').style.display='none';stop3D();
+    const e=$('#end');e.classList.add('win');$('#endH').textContent='Target neutralized';
+    $('#endP').textContent='Adrian Voss fled his burning office as every screen died. Evidence filed, power down, workstation owned. Contract complete.';
+    $('#end button').textContent='Play again';e.style.display='flex';rcPush();},600);
+}
+function sabBarSync(){
+  const s=S.sab2;['#sbPCb','#sbPCv','#sbPCr'].forEach(id=>{const b=$(id);if(b)b.classList.remove('on')});
+  const bb=$('#sbPCb'),bv=$('#sbPCv'),br=$('#sbPCr');if(!bb)return;
+  bb.disabled=s.blackout;bb.textContent=s.blackout?'⚡ Power: OFF':'⚡ Initiate Blackout';
+  bv.disabled=!s.blackout||s.virus;bv.textContent=s.virus?'🐛 Virus: active':'🐛 Deploy Virus';
+  br.disabled=!s.virus||s.burn;br.textContent=s.burn?'🔥 Overloading…':'🔥 Overload Displays';
+}
+/* phone toolkit */
+/* Remote Access Toolkit — phone render + controls (replaces simple sab UI) */
+function tkShow(v){P.sab.view=v;['home','facility','intrusion','surv','net'].forEach(id=>{const e=$('#tk'+id.charAt(0).toUpperCase()+id.slice(1));if(e)e.hidden=(id!==v)});}
+function rcSabRender(st){
+  const s=st.sab||{};
+  if(!P.sab||typeof P.sab!=='object'||P.sab.view===undefined)P.sab={view:'home',prog:0};
+  tkShow(P.sab.view);
+  /* facility power states */
+  const ring=$('#tkRing');
+  if(s.blackout){
+    $('#tkPowerView').hidden=true;
+    if(P.sab.prog<100){/* let progress animation finish, then done */}
+    else{$('#tkProgView').hidden=true;$('#tkDoneView').hidden=false}
+  }else{
+    $('#tkPowerView').hidden=false;$('#tkProgView').hidden=true;$('#tkDoneView').hidden=true;
+    if(ring){ring.classList.remove('off')}$('#tkSys').textContent='ONLINE';$('#tkSys').classList.remove('off');
+  }
+  /* intrusion states */
+  const bv=$('#tkVirus'),bb=$('#tkBurn');
+  if(bv){bv.disabled=!s.blackout||s.virus;bv.hidden=s.virus;}
+  if(bb){bb.hidden=!s.virus;bb.disabled=s.burn;}
+  const laptop=$('#tkLaptop');if(laptop)laptop.classList.toggle('live',s.virus);
+  const msg=$('#tkIntruMsg');if(msg)msg.textContent=s.burn?'Displays overloading — target neutralised.':s.virus?'Payload active. Overload his displays to finish.':s.blackout?'Power is down. Deploy the payload.':'Cut building power first (Facility Control).';
+  if(s.blackout&&$('#tkConfirm'))$('#tkConfirm').hidden=true;
+}
+function tkBlackoutProgress(){
+  const steps=['Bypassing power management…','Injecting control command…','Disabling building systems…','Finalising…'];
+  const ul=$('#tkSteps');ul.replaceChildren();steps.forEach(t=>{const li=document.createElement('li');li.textContent=t;ul.appendChild(li)});
+  $('#tkPowerView').hidden=true;$('#tkDoneView').hidden=true;$('#tkProgView').hidden=false;P.sab.prog=0;
+  clearInterval(P.sab.pi);
+  P.sab.pi=setInterval(()=>{P.sab.prog=Math.min(100,P.sab.prog+4);$('#tkPct').textContent=P.sab.prog+'%';
+    const done=Math.floor(P.sab.prog/25);[...ul.children].forEach((li,i)=>li.classList.toggle('ok',i<done));
+    if(P.sab.prog>=100){clearInterval(P.sab.pi);setTimeout(()=>{$('#tkProgView').hidden=true;$('#tkDoneView').hidden=false},300)}
+  },70);
+}
+function rcSabControls(){
+  P.sab={view:'home',prog:0};
+  $$('#rcSab [data-view]').forEach(b=>b.addEventListener('click',()=>tkShow(b.dataset.view)));
+  const ring=()=>{if(!(P.st&&P.st.sab&&P.st.sab.blackout))$('#tkConfirm').hidden=false};
+  $('#tkRing').onclick=ring;$('#tkBlackout').onclick=ring;
+  $('#tkCancel').onclick=()=>{$('#tkConfirm').hidden=true};
+  $('#tkConfirmGo').onclick=()=>{$('#tkConfirm').hidden=true;tkBlackoutProgress();rcSend({a:'sab',step:'blackout'})};
+  $('#tkVirus').onclick=()=>rcSend({a:'sab',step:'virus'});
+  $('#tkBurn').onclick=()=>rcSend({a:'sab',step:'burn'});
+}
+
 /* ---------- 3D room ---------- */
 let R=null;
 function open3D(){
@@ -722,8 +1395,8 @@ function open3D(){
   const scr=t=>new THREE.MeshBasicMaterial({map:t,fog:false});
 
   /* ---- lights ---- */
-  scene.add(new THREE.HemisphereLight(0x5f8f86,0x0a1110,.75));
-  const L=(c,i,d,x,y,z)=>{const l=new THREE.PointLight(c,i,d,1.6);l.position.set(x,y,z);scene.add(l);return l};
+  const LIGHTS=[];const hemi=new THREE.HemisphereLight(0x5f8f86,0x0a1110,.75);scene.add(hemi);
+  const L=(c,i,d,x,y,z)=>{const l=new THREE.PointLight(c,i,d,1.6);l.position.set(x,y,z);scene.add(l);LIGHTS.push(l);return l};
   const screenGlow=L(0x58d8ff,1.6,9,1.8,2.2,-2.2);
   L(0x5cffc0,.9,7,-4.4,3.6,-3.2);             // strip light over the sign
   const red=L(0xff2a2a,1.6,7,-.6,3.2,-3.2);    // alarm lamp
@@ -740,7 +1413,7 @@ function open3D(){
   for(let i=-5;i<=5;i++)add(B(.04,4.4,.04),M(0x15201e),i*1.1,2.2,-3.97);
 
   /* ---- sign + strip light (left) ---- */
-  add(B(1.9,.72,.06),scr(T.sign),-4.55,2.6,-3.93);
+  const SIGN=add(B(1.9,.72,.06),scr(T.sign),-4.55,2.6,-3.93);
   add(B(1.2,.08,.18),GL(0xbfffee),-4.55,3.4,-3.85);
   /* side cabinet + plant */
   add(B(1.3,.9,.7),M(0x161d1c),-4.6,.45,-3.4);
@@ -758,7 +1431,7 @@ function open3D(){
   add(B(.24,.2,.14),M(0x222222),-.6,3.25,-3.9);
   const lamp=add(new THREE.SphereGeometry(.14,16,12,0,Math.PI*2,0,Math.PI/1.4),GL(0xff3b30),-.6,3.12,-3.8);lamp.rotation.x=Math.PI;
   /* wall monitors */
-  const wallMon=(x,w,t)=>{add(B(w+.1,1.05,.06),M(0x0a0d0e),x,2.85,-3.92);add(B(w,.97,.02),scr(t),x,2.85,-3.88)};
+  const WALL=[];const wallMon=(x,w,t)=>{add(B(w+.1,1.05,.06),M(0x0a0d0e),x,2.85,-3.92);WALL.push(add(B(w,.97,.02),scr(t),x,2.85,-3.88))};
   wallMon(.75,1.75,T.dom);wallMon(2.75,1.6,T.txn);
   /* cork board */
   add(B(2.6,1.86,.05),scr(T.board),4.75,2.55,-3.92);
@@ -770,7 +1443,7 @@ function open3D(){
   add(B(.7,.9,1.1),M(0x1a1f21),3.45,.45,deskZ);[.25,.55,.8].forEach(y=>add(B(.6,.02,.01),M(0x3a4246),3.45,y,deskZ+.56));
   add(B(.08,.9,1.1),M(0x161a1c),-.7,.45,deskZ);
   /* desk monitors */
-  [[.1,T.arch],[1.55,T.surv],[3.0,T.pipe]].forEach(([x,t],i)=>{const g=grp(x,1.55,deskZ-.25,(1-i)*.12);add(B(1.38,.88,.05),M(0x0a0d0e),0,0,0,g);add(B(1.3,.8,.01),scr(t),0,0,.03,g);add(B(.1,.42,.08),M(0x0a0d0e),0,-.55,-.04,g);add(B(.4,.03,.25),M(0x0a0d0e),0,-.75,0,g)});
+  const DESK=[];[[.1,T.arch],[1.55,T.surv],[3.0,T.pipe]].forEach(([x,t],i)=>{const g=grp(x,1.55,deskZ-.25,(1-i)*.12);add(B(1.38,.88,.05),M(0x0a0d0e),0,0,0,g);DESK.push(add(B(1.3,.8,.01),scr(t),0,0,.03,g));add(B(.1,.42,.08),M(0x0a0d0e),0,-.55,-.04,g);add(B(.4,.03,.25),M(0x0a0d0e),0,-.75,0,g)});
   /* keyboard, mug, papers, phone, gadget */
   add(B(.9,.03,.3),M(0x14181a),.9,1.0,deskZ+.25);
   add(new THREE.CylinderGeometry(.09,.08,.2,16),M(0xe6e6e0),1.7,1.09,deskZ+.25);
@@ -904,25 +1577,73 @@ function open3D(){
     lock:l?{id:l.id,name:l.name,ready:l.s>=.22&&!l.got,got:l.got}:null,marks:v.map(o=>({id:o.id,x:+o.x.toFixed(3),y:+o.y.toFixed(3),s:+o.s.toFixed(2),got:o.got})),
     ev:S.ev.slice(),names:Object.fromEntries(EV.map(e=>[e.id,e.name])),need:NEED,total:EV.length}};
 
+  /* ---- sabotage finale: blackout / virus / burn / panic ---- */
+  const SAB={on:false,black:0,virus:false,burn:false,panic:false,t0:0,done:false};
+  const virusTex=tex(512,340,(x,w,h)=>{x.fillStyle='#120406';x.fillRect(0,0,w,h);x.strokeStyle='#ff2a2a';x.lineWidth=6;x.strokeRect(6,6,w-12,h-12);
+    x.fillStyle='#ff3b3b';x.font='bold 40px monospace';x.textAlign='center';x.fillText('⚠ SYSTEM',w/2,80);x.fillText('COMPROMISED',w/2,124);
+    x.font='bold 70px monospace';x.fillText('🐛',w/2,210);x.font='16px monospace';x.fillStyle='#ff8a8a';x.fillText('VossAccess.exe // injecting…',w/2,270);x.fillText('ACCESS: ROOT',w/2,296)});
+  const fireCv=document.createElement('canvas');fireCv.width=256;fireCv.height=170;const fx=fireCv.getContext('2d');const fireTex=new THREE.CanvasTexture(fireCv);
+  function drawFire(t){const w=256,h=170;fx.fillStyle='#000';fx.fillRect(0,0,w,h);
+    for(let i=0;i<70;i++){const px=Math.random()*w,base=h-Math.random()*h*.9,hue=20+Math.random()*35;fx.fillStyle='hsl('+hue+',100%,'+(45+Math.random()*25)+'%)';fx.globalAlpha=.5+Math.random()*.5;fx.beginPath();fx.arc(px,base,6+Math.random()*14,0,7);fx.fill()}
+    fx.globalAlpha=1;fx.fillStyle='#120400';for(let i=0;i<30;i++)fx.fillRect(Math.random()*w,Math.random()*h*.4,w/8,4);
+    fx.fillStyle='#ffd27f';fx.font='bold 26px monospace';fx.textAlign='center';fx.globalAlpha=.85;fx.fillText('OVERHEAT',w/2,h/2);fx.globalAlpha=1;fireTex.needsUpdate=true}
+  const sparks=[];for(let i=0;i<16;i++){const s=add(B(.03,.03,.03),GL(0xffb24a),0,-5,0);s.visible=false;sparks.push({m:s,life:0})}
+  const emLight=new THREE.PointLight(0xff5a2a,0,6,1.6);emLight.position.set(1.5,1.6,-2.4);scene.add(emLight);
+  const redEm=new THREE.PointLight(0xff2a2a,0,7,1.6);redEm.position.set(0,2.6,-1.5);scene.add(redEm);
+  let detached=false;
+  function applySab(step){
+    if(step==='blackout'){SAB.on=true;SAB.black=0.0001}
+    else if(step==='virus'){SAB.virus=true;DESK.forEach(m=>{m.material=new THREE.MeshBasicMaterial({map:virusTex,fog:false});m.visible=true});redEm.intensity=1.4}
+    else if(step==='burn'){SAB.burn=true;SAB.panic=true;SAB.t0=performance.now()/1000;
+      DESK.concat(WALL).forEach(m=>{m.material=new THREE.MeshBasicMaterial({map:fireTex,fog:false});m.visible=true});
+      if(!detached){detached=true;P.updateWorldMatrix(true,true);scene.attach(P)}}
+  }
+  const WPATH=[[1.6,0,.4],[-1.8,0,.2],[2.6,0,1.6],[-1.2,0,2.4],[1.8,0,.8]];
+  function animSab(t){
+    if(!SAB.on)return;
+    if(SAB.black<1){SAB.black=Math.min(1,SAB.black+.02);const k=1-SAB.black;
+      hemi.intensity=.75*k+.04;LIGHTS.forEach(l=>l.userData.base===undefined?(l.userData.base=l.intensity):0);LIGHTS.forEach(l=>l.intensity=l.userData.base*k*(SAB.virus||SAB.burn?.15:1));
+      WALL.concat(DESK,[SIGN]).forEach(m=>{if(!SAB.virus&&!SAB.burn)m.visible=SAB.black<.5});
+      redEm.intensity=SAB.black*1.1}
+    redEm.visible=true;redEm.intensity=(SAB.virus||SAB.burn?1.4:1.1)*(0.6+Math.sin(t*6)*.4);
+    if(SAB.burn){drawFire(t);emLight.intensity=1.6+Math.sin(t*22)*.8+Math.random()*.4;
+      sparks.forEach(s=>{if(s.life<=0&&Math.random()<.3){s.life=1;s.m.visible=true;s.m.position.set(1.0+Math.random()*2,1.2,deskZ+.4);s.vx=(Math.random()-.5)*.03;s.vy=.03+Math.random()*.03}
+        if(s.life>0){s.life-=.02;s.m.position.x+=s.vx;s.m.position.y+=s.vy;s.vy-=.002;s.m.visible=s.life>0;s.m.material.opacity=s.life}});
+      /* panic choreography */
+      const e=t-SAB.t0;const sw=Math.sin(e*14);
+      armL.rotation.x=-2.2+sw*.5;armR.rotation.x=-2.2-sw*.5;armL.rotation.z=-.6;armR.rotation.z=.6;
+      head.rotation.set(Math.sin(e*10)*.1,Math.sin(e*7)*.3,0);
+      if(e<.6){P.position.y=THREE.MathUtils.lerp(0,.12,e/.6)}
+      else if(e<5.2){const seg=(e-.6)/1.15,i=Math.floor(seg)%WPATH.length,a=WPATH[i],b=WPATH[(i+1)%WPATH.length],f=seg-Math.floor(seg);
+        const nx=THREE.MathUtils.lerp(a[0],b[0],f),nz=THREE.MathUtils.lerp(a[2],b[2],f);
+        P.rotation.y=Math.atan2(nx-P.position.x,nz-P.position.z);P.position.x=nx;P.position.z=nz;P.position.y=.08+Math.abs(Math.sin(e*14))*.08}
+      else{const f=Math.min(1,(e-5.2)/.9);P.position.x=THREE.MathUtils.lerp(P.position.x,2.7,f);P.position.z=THREE.MathUtils.lerp(P.position.z,-3.1,f);P.rotation.y=0;P.scale.setScalar(1.18*(1-f*.9));
+        if(f>=1&&!SAB.done){SAB.done=true;finishSab()}}
+    }
+  }
+
   let lastFrame=0;
   const tick=()=>{if(!R.run)return;requestAnimationFrame(tick);
     const t=performance.now()/1000;
-    head.rotation.x=Math.sin(t*.9)*.04;head.rotation.y=-.7+Math.sin(t*.5)*.08;
-    faR.rotation.x=Math.sin(t*12)*.03;
-    screenGlow.intensity=1.5+Math.sin(t*7)*.08+(Math.random()<.02?.4:0);
-    red.intensity=1.1+Math.sin(t*2.2)*.6;lamp.material.color.setHSL(0,1,.45+Math.sin(t*2.2)*.12);
-    leds.forEach((l,i)=>{l.visible=Math.sin(t*(2+i%5)+i*1.7)>-.6});
+    if(!SAB.panic){head.rotation.x=Math.sin(t*.9)*.04;head.rotation.y=-.7+Math.sin(t*.5)*.08;faR.rotation.x=Math.sin(t*12)*.03;}
+    if(!SAB.on){screenGlow.intensity=1.5+Math.sin(t*7)*.08+(Math.random()<.02?.4:0);
+      red.intensity=1.1+Math.sin(t*2.2)*.6;lamp.material.color.setHSL(0,1,.45+Math.sin(t*2.2)*.12);
+      leds.forEach((l,i)=>{l.visible=Math.sin(t*(2+i%5)+i*1.7)>-.6});}
+    else{animSab(t);lamp.visible=false;leds.forEach(l=>l.visible=false)}
     $('#clock').textContent=new Date().toLocaleString();
     const w=host.clientWidth,h=host.clientHeight;if(w&&h&&(Math.abs(cam.aspect-w/h)>.01)){ren.setSize(w,h);cam.aspect=w/h;cam.updateProjectionMatrix()}
     place();ren.render(scene,cam);
-    const l=lockOn(view());const x=$('#xhair');x.className=l?(l.got?'got':l.s>=.22?'ready':'far'):'';$('#lockLbl').textContent=l?(l.got?'On record: ':l.s>=.22?'Locked: ':'Zoom in: ')+l.name:'';
+    if(!SAB.on){const l=lockOn(view());const x=$('#xhair');x.className=l?(l.got?'got':l.s>=.22?'ready':'far'):'';$('#lockLbl').textContent=l?(l.got?'On record: ':l.s>=.22?'Locked: ':'Zoom in: ')+l.name:'';}
     if(RC.link&&RC.peer&&t-lastFrame>.5){lastFrame=t;const f=thumb(120,75,.42);if(f.length<3600)RC.send('rc.frame',{f,cam:ci})}};
-  R={run:true,tick,cmd,state,uiSync};uiSync();tick();
+  R={run:true,tick,cmd,state,uiSync,sab:applySab};uiSync();tick();
 }
 function stop3D(){if(R)R.run=false}
 $('#closeM').onclick=()=>{$('#modal').style.display='none';stop3D()};
 function submitEvidence(){if(S.ev.length<4||S.done)return;const t=S.trace;S.done=true;S.won=true;stop3D();$('#modal').style.display='none';$('#end').classList.add('win');$('#endH').textContent='Contract complete';$('#endP').textContent='Evidence filed: '+S.ev.length+' of 8 items captured, room mapped, trace at '+t+'%. '+(S.ev.length===8?'A complete file. The client is impressed.':'Client satisfied.');$('#end button').textContent='Play again';$('#end').style.display='flex';rcPush()}
-$('#submitBtn').onclick=submitEvidence;
+$('#submitBtn').onclick=()=>{if(S.ev.length>=4)sabStart();else RC&&RC.send&&0;};
+$('#sbPCb')&&($('#sbPCb').onclick=()=>sabDo('blackout'));
+$('#sbPCv')&&($('#sbPCv').onclick=()=>sabDo('virus'));
+$('#sbPCr')&&($('#sbPCr').onclick=()=>sabDo('burn'));
 $('#modal').addEventListener('transitionend',()=>{});
 render('home');
 </script>
