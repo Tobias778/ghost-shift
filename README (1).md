@@ -1,25 +1,27 @@
 <div align="center">
 
+<sub>SECURE CHANNEL · CLASSIFIED RECRUITMENT · OPERATION FALLEN EMPIRE</sub>
+
 # ⌁ ADSUMSOFT: OPERATION FALLEN EMPIRE
 
-<img src="https://img.shields.io/badge/%2F%2F%20CLASSIFIED-RECRUITMENT%20BRIEFING-AD1457?style=for-the-badge&labelColor=0D1117" alt="Classified recruitment briefing" />
+**Decode the message. Exploit the flaw. Expose the truth.**
 
-### `// ACCESS LEVEL: RECRUIT //`
-
-**THREE BREACHES. ONE EMPIRE. NO SECOND CHANCES.**
-
-![Signal](https://img.shields.io/badge/SIGNAL-DETECTED-00E5A8?style=flat-square&labelColor=101820)
-![Agent Status](https://img.shields.io/badge/AGENT-UNVERIFIED-FFB020?style=flat-square&labelColor=101820)
-![Operation](https://img.shields.io/badge/OPERATION-ACTIVE-F43F5E?style=flat-square&labelColor=101820)
-![Missions](https://img.shields.io/badge/STAGES-03-A78BFA?style=flat-square&labelColor=101820)
-![Environment](https://img.shields.io/badge/ENVIRONMENT-FICTIONAL%20SANDBOX-38BDF8?style=flat-square&labelColor=101820)
-
-`[ INITIATE BRIEFING ]` &nbsp; ` [ ENCRYPTED CHANNEL ] ` &nbsp; ` [ AUTHORIZATION REQUIRED ] `
+*An interactive, story-driven cybersecurity puzzle game.*
 
 ---
 
-*An interactive, story-driven cybersecurity puzzle game.*  
-*Decode the message. Exploit the flaw. Expose the truth.*
+![Project](https://img.shields.io/badge/Project-Adsumsoft-8B5CF6?style=flat-square&labelColor=151923)
+![Status](https://img.shields.io/badge/Status-Active%20Development-2EBD85?style=flat-square&labelColor=151923)
+![Access](https://img.shields.io/badge/Clearance-Recruit-DC4455?style=flat-square&labelColor=151923)
+![Missions](https://img.shields.io/badge/Missions-3-F5B84A?style=flat-square&labelColor=151923)
+![Platform](https://img.shields.io/badge/Platform-PC%20%2B%20Phone-4F91D9?style=flat-square&labelColor=151923)
+
+![Stage 1](https://img.shields.io/badge/Stage%2001-Cipher%20Decryption-9857D3?style=flat-square&labelColor=151923)
+![Stage 2](https://img.shields.io/badge/Stage%2002-SQL%20Injection-39ACD0?style=flat-square&labelColor=151923)
+![Stage 3](https://img.shields.io/badge/Stage%2003-Capture%20Evidence-E24B5D?style=flat-square&labelColor=151923)
+![Genre](https://img.shields.io/badge/Genre-Cybersecurity%20Puzzle-75859A?style=flat-square&labelColor=151923)
+
+`[ INITIATE BRIEFING ]` &nbsp; `[ ENCRYPTED CHANNEL ]` &nbsp; `[ AUTHORIZATION REQUIRED ]`
 
 </div>
 
@@ -70,7 +72,7 @@ But fragments of intercepted information suggest that **Project DOMINION** is mo
 
 ## `02 / YOUR THREE-STAGE OPERATION`
 
-![Decrypt](https://img.shields.io/badge/01-DECRYPT-6D28D9?style=for-the-badge&labelColor=0D1117) ![Inject](https://img.shields.io/badge/02-INJECT-0891B2?style=for-the-badge&labelColor=0D1117) ![Expose](https://img.shields.io/badge/03-EXPOSE-DC2626?style=for-the-badge&labelColor=0D1117)
+![Stage 01](https://img.shields.io/badge/01-DECRYPT-6D28D9?style=flat-square&labelColor=151923) ![Stage 02](https://img.shields.io/badge/02-INJECT-0891B2?style=flat-square&labelColor=151923) ![Stage 03](https://img.shields.io/badge/03-EXPOSE-DC2626?style=flat-square&labelColor=151923)
 
 ```text
 [ 01: DECRYPT ] ──────▶ [ 02: INJECT ] ──────▶ [ 03: EXPOSE ]
@@ -158,7 +160,7 @@ The **PC or laptop** is mission control. The **phone** becomes your field device
 
 ## `05 / OPERATION STATUS`
 
-![Status](https://img.shields.io/badge/PROJECT-IN%20DEVELOPMENT-F59E0B?style=for-the-badge&labelColor=0D1117)
+![Status](https://img.shields.io/badge/Project-In%20Development-F59E0B?style=flat-square&labelColor=151923)
 
 - [x] Stage 01 concept — Cipher decryption
 - [x] Stage 02 concept — SQL injection puzzle
